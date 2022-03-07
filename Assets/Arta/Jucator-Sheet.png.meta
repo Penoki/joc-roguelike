@@ -4,13 +4,13 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -1095978585660968418
-    second: Jucator-Sheet_0
+    second: Cap-Stanga
   - first:
       213: 4687261150234176172
-    second: Jucator-Sheet_1
+    second: Cap-Fata
   - first:
       213: 8117108924681243436
-    second: Jucator-Sheet_2
+    second: Cap-Spate
   - first:
       213: 4239262888255588817
     second: Jucator-Sheet_3
@@ -133,7 +133,13 @@ TextureImporter:
     second: Jucator-Sheet_42
   - first:
       213: -6002481921331689444
-    second: Jucator-Cap-Dreapta
+    second: Cap-Dreapta
+  - first:
+      213: 423955583841496562
+    second: Cap-Spate-Atac
+  - first:
+      213: -4141104907459540659
+    second: Cap-Dreapta-Atac
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -223,7 +229,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Jucator-Sheet_0
+      name: Cap-Stanga
       rect:
         serializedVersion: 2
         x: 0
@@ -244,7 +250,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jucator-Sheet_1
+      name: Cap-Fata
       rect:
         serializedVersion: 2
         x: 64
@@ -265,7 +271,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jucator-Sheet_2
+      name: Cap-Spate
       rect:
         serializedVersion: 2
         x: 128
@@ -1126,7 +1132,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jucator-Cap-Dreapta
+      name: Cap-Dreapta
       rect:
         serializedVersion: 2
         x: 192
@@ -1134,7 +1140,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1142,6 +1148,90 @@ TextureImporter:
       bones: []
       spriteID: c18025cbe76e2bca0800000000000000
       internalID: -6002481921331689444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cap-Stanga-Atac
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15c189817be98f8e0800000000000000
+      internalID: -1659401953457202095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cap-Fata-Atac
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8866ccba3458bd7f0800000000000000
+      internalID: -586728800750115192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cap-Spate-Atac
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fd6a677b5132e500800000000000000
+      internalID: 423955583841496562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cap-Dreapta-Atac
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d494f35f607d786c0800000000000000
+      internalID: -4141104907459540659
       vertices: []
       indices: 
       edges: []
