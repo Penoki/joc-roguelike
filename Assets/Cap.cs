@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cap : MiscareJucator
+public class Cap : MonoBehaviour
 {
+    public Rigidbody2D capRB;
     public Animator capAnimator;
     Vector2 vectorMiscare;
     //Apelat o data per cadru
