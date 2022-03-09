@@ -140,6 +140,9 @@ TextureImporter:
   - first:
       213: -4141104907459540659
     second: Cap-Dreapta-Atac
+  - first:
+      213: -1021269104276240437
+    second: Jucator-Ochi
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1232,6 +1235,27 @@ TextureImporter:
       bones: []
       spriteID: d494f35f607d786c0800000000000000
       internalID: -4141104907459540659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jucator-Ochi
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc7888b1929b3d1f0800000000000000
+      internalID: -1021269104276240437
       vertices: []
       indices: 
       edges: []
