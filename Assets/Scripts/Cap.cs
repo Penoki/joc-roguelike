@@ -8,11 +8,14 @@ public class Cap : MonoBehaviour
     public Animator capAnimator;
     public Sprite[] listaProiectile;
     Vector2 vectorMiscare,vectorDirectie; //vectorDirectie pentru a stii unde ataca
+    //parametrii/proprietati ale proiectilului
     private float vitezaProiectil = 2.5f;
     private double daunaProiectil = 1.5f;
     private float distantaProiectil = 1;
     private int indexProiectil = 0;
     public float rataProiectile = 1;
+    public GameObject proiectilPrototip;
+    public Transform[] pozitieCreareProiectil;
 
     //getter si setter pentru apelarea acestor variabile din alta clasa
     public float VProiectil { get => vitezaProiectil; set => vitezaProiectil = value; }
@@ -45,32 +48,40 @@ public class Cap : MonoBehaviour
         //cand input tastatura, atunci cream proiectil
         if (vectorDirectie.x != 0 || vectorDirectie.y !=0)
         {
-            
-            CreareProiectil(listaProiectile[indexProiectil], capRB, vectorDirectie, vitezaProiectil, daunaProiectil, distantaProiectil);
-            
+            #region stabilire pozitie de instantiere si directie
+            int i = 0;
+            if (vectorDirectie.y == 0 && vectorDirectie.x == 1)        //dreapta
+            {
+                i = 2;
+            }  
+            else if (vectorDirectie.y == 0 && vectorDirectie.x == -1)  //stanga
+            {
+                i = 3;
+            }
+            else if (vectorDirectie.y == 1)                            //spate
+            {
+                i = 1;
+                vectorDirectie.x = 0;
+            }
+            else                                                       //fata
+            {
+                i = 0;
+                vectorDirectie.x = 0;
+            }
+            #endregion
+            CreareProiectil(listaProiectile[indexProiectil], capRB, vectorDirectie, vitezaProiectil, daunaProiectil, distantaProiectil, pozitieCreareProiectil[i]);
         }
     }
-
-    void CreareProiectil(Sprite aspect, Rigidbody2D capJucator, Vector2 directie, float viteza, double dauna, float distanta)
+    void CreareProiectil(Sprite aspect, Rigidbody2D capJucator, Vector2 directie, float viteza, double dauna, float distanta, Transform poz)
     {
-        //creare obiect nou gol
-        GameObject ochi = new GameObject();
+        //creare obiect proiectil nou la pozitia specificata in unity
+        GameObject proiectilNou = Instantiate(proiectilPrototip, poz.position, poz.rotation) as GameObject;
 
-        //aici se vede cel mai bine folosirea getter, setter din clasa Ochi
-        Ochi ochiNou = ochi.AddComponent<Ochi>();
-        ochiNou.VitProiectil = viteza;
-        ochiNou.VectorMiscareOchi = directie;
-        ochiNou.DistProiectil = distanta;
+        //transmitere valori ale proprietatilor catre obiectul nou instantiat
+        proiectilNou.GetComponent<Ochi>().VitProiectil = viteza;
+        proiectilNou.GetComponent<Ochi>().VectorMiscareOchi = directie;
+        proiectilNou.GetComponent<Ochi>().DistProiectil = distanta;
+        proiectilNou.GetComponent<SpriteRenderer>().sprite = aspect;
 
-        //adaugare componenta si setare pozitie in functie de jucators
-        Rigidbody2D pozitieOchi = ochi.AddComponent<Rigidbody2D>();
-        pozitieOchi.position = capJucator.position;
-
-        //adaugare componenta si setare sprite
-        SpriteRenderer aspectOchi = ochi.AddComponent<SpriteRenderer>();
-        aspectOchi.sprite = aspect;
-
-        
     }
-
 }

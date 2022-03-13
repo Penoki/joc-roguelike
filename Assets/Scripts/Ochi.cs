@@ -19,6 +19,8 @@ public class Ochi : MonoBehaviour
     void Start()
     {
         rbProiectil = this.GetComponent<Rigidbody2D>();
+
+        //distrugere proiectil dupa distProiectil secunde
         Destroy(this.gameObject, distProiectil);
 
     }
