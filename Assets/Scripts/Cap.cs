@@ -10,14 +10,14 @@ public class Cap : MonoBehaviour
     Vector2 vectorMiscare,vectorDirectie; //vectorDirectie pentru a stii unde ataca
     private float vitezaProiectil = 2.5f;
     private double daunaProiectil = 1.5f;
-    private int distantaProiectil = 1;
+    private float distantaProiectil = 1;
     private int indexProiectil = 0;
     public float rataProiectile = 1;
 
     //getter si setter pentru apelarea acestor variabile din alta clasa
     public float VProiectil { get => vitezaProiectil; set => vitezaProiectil = value; }
     public double DaunaProiectil { get => daunaProiectil; set => daunaProiectil = value; }
-    public int DistantaProiectil { get => distantaProiectil; set => distantaProiectil = value; }
+    public float DistantaProiectil { get => distantaProiectil; set => distantaProiectil = value; }
     public int IndexProiectil { get => indexProiectil; set => indexProiectil = value; }
 
     //Apelat o data per cadru
@@ -51,7 +51,7 @@ public class Cap : MonoBehaviour
         }
     }
 
-    void CreareProiectil(Sprite aspect, Rigidbody2D capJucator, Vector2 directie, float viteza, double dauna, int distanta)
+    void CreareProiectil(Sprite aspect, Rigidbody2D capJucator, Vector2 directie, float viteza, double dauna, float distanta)
     {
         //creare obiect nou gol
         GameObject ochi = new GameObject();
@@ -62,7 +62,7 @@ public class Cap : MonoBehaviour
         ochiNou.VectorMiscareOchi = directie;
         ochiNou.DistProiectil = distanta;
 
-        //adaugare componenta si setare pozitie in functie de jucator
+        //adaugare componenta si setare pozitie in functie de jucators
         Rigidbody2D pozitieOchi = ochi.AddComponent<Rigidbody2D>();
         pozitieOchi.position = capJucator.position;
 
