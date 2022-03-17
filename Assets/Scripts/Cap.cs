@@ -8,12 +8,14 @@ public class Cap : MonoBehaviour
     public Animator capAnimator;
     public Sprite[] listaProiectile;
     Vector2 vectorMiscare,vectorDirectie; //vectorDirectie pentru a stii unde ataca
+
     //parametrii/proprietati ale proiectilului
-    private float vitezaProiectil = 2.5f;
+    private float vitezaProiectil = 1.2f;
     private double daunaProiectil = 1.5f;
-    private float distantaProiectil = 1;
+    private float distantaProiectil = 2;
     private int indexProiectil = 0;
-    public float rataProiectile = 1;
+    public float timpRacire = 0.4f;
+    private float timpUrmatorClipit = 0;
     public GameObject proiectilPrototip;
     public Transform[] pozitieCreareProiectil;
 
@@ -46,7 +48,7 @@ public class Cap : MonoBehaviour
         capAnimator.SetFloat("FViteza", vectorDirectie.sqrMagnitude);
 
         //cand input tastatura, atunci cream proiectil
-        if (vectorDirectie.x != 0 || vectorDirectie.y !=0)
+        if ((vectorDirectie.x != 0 || vectorDirectie.y !=0) && Time.time>timpUrmatorClipit)
         {
             #region stabilire pozitie de instantiere si directie
             int i = 0;
@@ -70,6 +72,7 @@ public class Cap : MonoBehaviour
             }
             #endregion
             CreareProiectil(listaProiectile[indexProiectil], capRB, vectorDirectie, vitezaProiectil, daunaProiectil, distantaProiectil, pozitieCreareProiectil[i]);
+            timpUrmatorClipit = Time.time + timpRacire;
         }
     }
     void CreareProiectil(Sprite aspect, Rigidbody2D capJucator, Vector2 directie, float viteza, double dauna, float distanta, Transform poz)

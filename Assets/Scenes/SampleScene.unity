@@ -517,7 +517,7 @@ MonoBehaviour:
   capAnimator: {fileID: 847336952}
   listaProiectile:
   - {fileID: -1021269104276240437, guid: dbf551164429aec439a517b3bc46f78f, type: 3}
-  rataProiectile: 1
+  timpRacire: 0.4
   proiectilPrototip: {fileID: 4094989091901666750, guid: 87b35aa8e4fc4f64db4ceaf1a6db5b7d, type: 3}
   pozitieCreareProiectil:
   - {fileID: 1532659577}
