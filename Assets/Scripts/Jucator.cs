@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Jucator : MonoBehaviour
 {
-    public float vitezaMiscare = 2.4f;
+    public float vitezaMiscare = 1.7f;
     public Rigidbody2D rb;
     public Animator animator;
 
@@ -19,7 +19,8 @@ public class Jucator : MonoBehaviour
         //setare parametrii care dicteaza animatia curenta
         animator.SetFloat("Orizontal", vectorMiscare.x);
         animator.SetFloat("Vertical", vectorMiscare.y);
-        animator.SetFloat("Viteza", vectorMiscare.sqrMagnitude);
+        animator.SetFloat("Miscare", vectorMiscare.sqrMagnitude);
+        animator.SetFloat("Viteza", vitezaMiscare);
 
         //rezolvare aceeasi viteza pe miscare pe diagonala
         if (vectorMiscare.x != 0 && vectorMiscare.y != 0)

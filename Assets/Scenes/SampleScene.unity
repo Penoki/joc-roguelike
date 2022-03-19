@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 135551067}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.31, z: 0}
+  m_LocalPosition: {x: 0, y: 0.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 200438071}
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2e568aeeb4479546a7a629a63e54856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vitezaMiscare: 2.4
+  vitezaMiscare: 1.7
   rb: {fileID: 200438070}
   animator: {fileID: 200438074}
 --- !u!70 &200438073
@@ -517,13 +517,14 @@ MonoBehaviour:
   capAnimator: {fileID: 847336952}
   listaProiectile:
   - {fileID: -1021269104276240437, guid: dbf551164429aec439a517b3bc46f78f, type: 3}
-  timpRacire: 0.4
+  corp: {fileID: 200438072}
   proiectilPrototip: {fileID: 4094989091901666750, guid: 87b35aa8e4fc4f64db4ceaf1a6db5b7d, type: 3}
   pozitieCreareProiectil:
   - {fileID: 1532659577}
   - {fileID: 135551068}
   - {fileID: 861836207}
   - {fileID: 1348186684}
+  rataDeClipire: 1
 --- !u!1 &861836206
 GameObject:
   m_ObjectHideFlags: 0

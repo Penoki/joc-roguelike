@@ -7,29 +7,47 @@ public class Cap : MonoBehaviour
     public Rigidbody2D capRB;
     public Animator capAnimator;
     public Sprite[] listaProiectile;
+    public Jucator corp;
     Vector2 vectorMiscare,vectorDirectie; //vectorDirectie pentru a stii unde ataca
 
     //parametrii/proprietati ale proiectilului
-    private float vitezaProiectil = 1.2f;
+    private float vitezaProiectil = 1.8f;
     private double daunaProiectil = 1.5f;
-    private float distantaProiectil = 2;
+    private float distantaProiectil = 1.2f;
     private int indexProiectil = 0;
-    public float timpRacire = 0.4f;
-    private float timpUrmatorClipit = 0;
+    private bool permisClipit = false;
+    private bool proiectilSpate = false; //pentru ordinea de afisare sprite-uri
     public GameObject proiectilPrototip;
     public Transform[] pozitieCreareProiectil;
+    public float rataDeClipire = 1f; //multiplicator al vitezei animatiei de clipire, respectiv al ratei de creare proiectil
+    private float inclinareDirectie;
+
 
     //getter si setter pentru apelarea acestor variabile din alta clasa
     public float VProiectil { get => vitezaProiectil; set => vitezaProiectil = value; }
     public double DaunaProiectil { get => daunaProiectil; set => daunaProiectil = value; }
     public float DistantaProiectil { get => distantaProiectil; set => distantaProiectil = value; }
     public int IndexProiectil { get => indexProiectil; set => indexProiectil = value; }
+    public void PermiteClipire() //functie apelata de eveniment declansat de animatii
+    {
+        permisClipit = true;
+    }
+    public void ProiectilStratOrdine() //modificare ordinea de afisare a proiectilului pentru a fi in spatele capului cand declansat acel AnimationEvent
+    {
+        proiectilSpate = true;
+    }
+
+    private void Start()
+    {
+        //update viteza toate animatii cap
+        capAnimator.speed = 1.8f;
+    }
 
     //Apelat o data per cadru
     void Update()
     {
-        //update viteza clipit
-        capAnimator.speed = vitezaProiectil;
+        //calcul inclinare directie proiectil, in functie de viteza de miscare a jucatorului
+        inclinareDirectie = corp.vitezaMiscare / 8;
 
         //ascultare taste W A S D
         vectorMiscare.x = Input.GetAxisRaw("Horizontal"); //A -1, D 1
@@ -47,32 +65,55 @@ public class Cap : MonoBehaviour
         capAnimator.SetFloat("FVertical", vectorDirectie.y);
         capAnimator.SetFloat("FViteza", vectorDirectie.sqrMagnitude);
 
+        capAnimator.SetFloat("RataClipit", rataDeClipire);
+
         //cand input tastatura, atunci cream proiectil
-        if ((vectorDirectie.x != 0 || vectorDirectie.y !=0) && Time.time>timpUrmatorClipit)
+        if ((vectorDirectie.x != 0 || vectorDirectie.y !=0) && permisClipit)
         {
-            #region stabilire pozitie de instantiere si directie
+            #region stabilire pozitie de instantiere
             int i = 0;
-            if (vectorDirectie.y == 0 && vectorDirectie.x == 1)        //dreapta
+            if (vectorDirectie.y == 0 && vectorDirectie.x == 1)                         //strict dreapta
             {
-                i = 2;
+                i = 2;                                              //pozitie creare dreapta
             }  
-            else if (vectorDirectie.y == 0 && vectorDirectie.x == -1)  //stanga
+            else if (vectorDirectie.y == 0 && vectorDirectie.x == -1)                   //strict stanga
             {
-                i = 3;
+                i = 3;                                              //pozitie creare stanga
             }
-            else if (vectorDirectie.y == 1)                            //spate
+            else if (vectorDirectie.y == 1)                                             //sus
             {
-                i = 1;
-                vectorDirectie.x = 0;
+                i = 1;                                              //pozitie creare sus
+                vectorDirectie.x = 0;//anulare miscare diagonala
             }
-            else                                                       //fata
+            else                                                                        //jos
             {
-                i = 0;
-                vectorDirectie.x = 0;
+                i = 0;                                              //pozitie creare jos
+                vectorDirectie.x = 0;//anulare miscare diagonala
             }
             #endregion
+
+            #region stabilire inclinare directie in functie de miscarea jucatorului
+            if (vectorMiscare.y == 1 && vectorDirectie.y==0)            //daca se misca sus si nu impusca sus jos
+            {
+                vectorDirectie.y += inclinareDirectie;          //inclinare in sus
+            }
+            else if (vectorMiscare.y == -1 && vectorDirectie.y == 0)    //daca se misca jos si nu impusca sus jos
+            {
+                vectorDirectie.y -= inclinareDirectie;          //inclinare in jos
+            }
+            else if (vectorMiscare.x == 1 && vectorDirectie.x == 0)     //daca se misca dreapta si nu impusca stanga dreapta
+            {
+                vectorDirectie.x += inclinareDirectie;          //inclinare in dreapta
+            }
+            else if(vectorMiscare.x == -1 && vectorDirectie.x == 0)     //daca se misca stanga si nu impusca stanga dreapta
+            {
+                vectorDirectie.x -= inclinareDirectie;          //inclinare in stanga
+            }
+            #endregion
+
             CreareProiectil(listaProiectile[indexProiectil], capRB, vectorDirectie, vitezaProiectil, daunaProiectil, distantaProiectil, pozitieCreareProiectil[i]);
-            timpUrmatorClipit = Time.time + timpRacire;
+            permisClipit = false;
+            proiectilSpate = false;
         }
     }
     void CreareProiectil(Sprite aspect, Rigidbody2D capJucator, Vector2 directie, float viteza, double dauna, float distanta, Transform poz)
@@ -85,6 +126,6 @@ public class Cap : MonoBehaviour
         proiectilNou.GetComponent<Ochi>().VectorMiscareOchi = directie;
         proiectilNou.GetComponent<Ochi>().DistProiectil = distanta;
         proiectilNou.GetComponent<SpriteRenderer>().sprite = aspect;
-
+        if (proiectilSpate) { proiectilNou.GetComponent<SpriteRenderer>().sortingOrder = -1; }
     }
 }
