@@ -1048,10 +1048,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fdd552e51e8504bad3912a25616b06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camereN: 4
+  camereN: 8
   arataTablaJoc: {fileID: 1241699191}
-  samanta: 944
-  introduManualSamanta: 1
+  samanta: 200
+  introduManualSamanta: 0
 --- !u!1001 &8682460793921553635
 PrefabInstance:
   m_ObjectHideFlags: 0
