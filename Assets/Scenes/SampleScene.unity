@@ -760,6 +760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &1634201957
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,6 +874,8 @@ MonoBehaviour:
   arataTablaJoc: {fileID: 1241699191}
   samanta: 944
   introduManualSamanta: 1
+=======
+>>>>>>> parent of 02a0407 (First Try Generation ASCII)
 =======
 >>>>>>> parent of 02a0407 (First Try Generation ASCII)
 --- !u!1001 &8682460793921553635
