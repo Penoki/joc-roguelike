@@ -1050,13 +1050,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camereN: 8
   arataTablaJoc: {fileID: 1241699191}
-<<<<<<< HEAD
-  samanta: 505
-  introduManualSamanta: 1
-=======
-  samanta: 857
+  samanta: 200
   introduManualSamanta: 0
->>>>>>> parent of 2c63e93 (Second Try Generator Tabla Joc)
+
+
 --- !u!1001 &8682460793921553635
 PrefabInstance:
   m_ObjectHideFlags: 0
