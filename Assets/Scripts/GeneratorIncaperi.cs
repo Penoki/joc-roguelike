@@ -15,23 +15,49 @@ public class GeneratorIncaperi : MonoBehaviour
                      2->6 = cost 
     */
     public int camereN = 7;
-    public const int marimeTabla = 13;
+    public const int marimeTabla = 13;                                   //spatiul maxim de plasare al camerelor
     private bool tezaur = true;                                          //scopul de a avea doar 1 incapere de genul per etaj
-    private char[,] grilaj = new char[marimeTabla, marimeTabla];         //spatiul maxim de plasare al camerelor
+    private char[,] grilaj = new char[marimeTabla, marimeTabla];         
     public Text arataTablaJoc;
-    public int samanta = 8;
+    public int sambure = 8;
     public bool introduManualSamanta = false;
-    private int index = -1;
     private float distantaMax = 0;
-    private int pozitieIndepartata;
     private int nrIteratiiTotale = 0;
+    private int pozitieIndepartata;
 
     void Start()
     {
         if (!introduManualSamanta)
-        { samanta = System.DateTime.Now.Millisecond; } //fortuita generare de samanta
-        Random.InitState(samanta);
-        int camereN_initial, camereN_ramase, indexAdiacentaN;
+        { sambure = System.DateTime.Now.Millisecond; } //fortuita generare de samanta
+        Random.InitState(sambure);
+
+        char[,] grilaj = CreareTablaJoc(sambure);
+
+        #region Afisare Tabla Joc Creata
+        arataTablaJoc.text = $"Samanta: {sambure}\n";
+        arataTablaJoc.text += "Tabla de joc:\n";
+
+        //afisare grilaj creat
+        for (int i = 0; i < 13; i++)
+        {
+            for (int j = 0; j < 13; j++)
+            {
+                arataTablaJoc.text += " ";
+                arataTablaJoc.text += grilaj[i, j];
+                arataTablaJoc.text += " ";
+            }
+            arataTablaJoc.text += "\n";
+            nrIteratiiTotale++;
+        }
+        arataTablaJoc.text += $"\n Numar iteratii totale: {nrIteratiiTotale}";
+        #endregion
+    }
+
+    private char[,] CreareTablaJoc(int samanta)
+    {
+        int index = -1;
+        char[,] grilaj = new char[marimeTabla, marimeTabla];
+        int camereN_initial, camereN_ramase;
         List<int> adiacentS = new List<int> { 506, 605, 607, 706 };
         List<int> adiacentS_noua = new List<int>();
         List<int> parceleValide = new List<int>();     //lista in care se vor salva locurile cu cost '1' unde se pot plasa camere
@@ -60,9 +86,9 @@ public class GeneratorIncaperi : MonoBehaviour
         //Debug.Log(camereN_ramase);
         while (adiacentS_noua.Count < camereN_initial && adiacentS.Count > 0)   //extragere pozitii random instantiere camere 'N' pe langa 'S'
         {
-            int index = Random.Range(0, adiacentS.Count);
-            adiacentS_noua.Add(adiacentS[index]);
-            adiacentS.RemoveAt(index);
+            int k = Random.Range(0, adiacentS.Count);
+            adiacentS_noua.Add(adiacentS[k]);
+            adiacentS.RemoveAt(k);
             nrIteratiiTotale++;
         }
 
@@ -142,24 +168,7 @@ public class GeneratorIncaperi : MonoBehaviour
 
         #endregion
 
-        #region Afisare Grilaj Creat
-        arataTablaJoc.text = $"Samanta: {samanta}\n";
-        arataTablaJoc.text += "Tabla de joc:\n";
-
-        //afisare grilaj creat
-        for (int i = 0; i < 13; i++)
-        {
-            for (int j = 0; j < 13; j++)
-            {
-                arataTablaJoc.text += " ";
-                arataTablaJoc.text += grilaj[i, j];
-                arataTablaJoc.text += " ";
-            }
-            arataTablaJoc.text += "\n";
-            nrIteratiiTotale++;
-        }
-        arataTablaJoc.text += $"\n Numar iteratii totale: {nrIteratiiTotale}";
-        #endregion
+        return grilaj;
     }
 
     private void IncrementareCostAdiacent(List<int> parceleValide, int g, int h, int increment)
