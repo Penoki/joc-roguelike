@@ -690,7 +690,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -250, y: 400}
+  m_AnchoredPosition: {x: -250, y: 200}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1241699191
@@ -1048,9 +1048,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fdd552e51e8504bad3912a25616b06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camereN: 8
+  camereN: 5
   arataTablaJoc: {fileID: 1241699191}
-  samanta: 944
+  sambure: 441
   introduManualSamanta: 0
 --- !u!1001 &8682460793921553635
 PrefabInstance:

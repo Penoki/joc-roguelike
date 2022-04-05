@@ -16,8 +16,7 @@ public class GeneratorIncaperi : MonoBehaviour
     */
     public int camereN = 7;
     public const int marimeTabla = 13;                                   //spatiul maxim de plasare al camerelor
-    private bool tezaur = true;                                          //scopul de a avea doar 1 incapere de genul per etaj
-    private char[,] grilaj = new char[marimeTabla, marimeTabla];         
+    
     public Text arataTablaJoc;
     public int sambure = 8;
     public bool introduManualSamanta = false;
@@ -55,6 +54,7 @@ public class GeneratorIncaperi : MonoBehaviour
 
     private char[,] CreareTablaJoc(int samanta)
     {
+        bool tezaur = true;                                          //scopul de a avea doar 1 incapere de genul per etaj  
         int index = -1;
         char[,] grilaj = new char[marimeTabla, marimeTabla];
         int camereN_initial, camereN_ramase;
@@ -98,7 +98,7 @@ public class GeneratorIncaperi : MonoBehaviour
             int h = adiacentS_noua[i] % 100;
             grilaj[g, h] = 'N';                 //plasare 'N'-uri pe tabla de joc
 
-            IncrementareCostAdiacent(parceleValide, g, h, 1);
+            IncrementareCostAdiacent(ref grilaj, parceleValide, g, h, 1);
             nrIteratiiTotale++;
         }
         #endregion
@@ -117,7 +117,7 @@ public class GeneratorIncaperi : MonoBehaviour
                 grilaj[g, h] = 'N';
                 parceleValide.RemoveAt(index);      //stergere pozitie in care s-a plasat 'N'
 
-                IncrementareCostAdiacent(parceleValide, g, h, 1);
+                IncrementareCostAdiacent(ref grilaj, parceleValide, g, h, 1);
                 index = -1;
             }
             if (index == (parceleValide.Count - 1)) index = -1;
@@ -138,7 +138,7 @@ public class GeneratorIncaperi : MonoBehaviour
                 grilaj[g, h] = 'X';
                 parceleValide.RemoveAt(index);      //stergere pozitia in care s-a plasat 'X'
 
-                IncrementareCostAdiacent(parceleValide, g, h, 2);
+                IncrementareCostAdiacent(ref grilaj, parceleValide, g, h, 2);
                 index = -1;
             }
             if (index == (parceleValide.Count - 1)) index = -1;
@@ -163,7 +163,7 @@ public class GeneratorIncaperi : MonoBehaviour
         }
         //Plasare camera zmeu 'B'
         grilaj[pozitieIndepartata / 100, pozitieIndepartata % 100] = 'B';
-        IncrementareCostAdiacent(parceleValide, pozitieIndepartata / 100, pozitieIndepartata % 100, 2);
+        IncrementareCostAdiacent(ref grilaj, parceleValide, pozitieIndepartata / 100, pozitieIndepartata % 100, 2);
         #endregion
 
         #endregion
@@ -171,14 +171,14 @@ public class GeneratorIncaperi : MonoBehaviour
         return grilaj;
     }
 
-    private void IncrementareCostAdiacent(List<int> parceleValide, int g, int h, int increment)
+    private void IncrementareCostAdiacent(ref char[,] grilaj_primit, List<int> parceleValide, int g, int h, int increment)
     {
         //++ cost pozitii adiacente noii camere introduse
         if (g < 13)                                                 //interzis depasire dimensiuni tabla de joc
-            if (grilaj[g + 1, h] < '6')                              //'6' este valoarea maxima de cost posibila
+            if (grilaj_primit[g + 1, h] < '6')                              //'6' este valoarea maxima de cost posibila
             {
-                grilaj[g + 1, h] = (char)((int)grilaj[g + 1, h] + increment);     //incrementare cost
-                if (grilaj[g + 1, h] == '1')
+                grilaj_primit[g + 1, h] = (char)((int)grilaj_primit[g + 1, h] + increment);     //incrementare cost
+                if (grilaj_primit[g + 1, h] == '1')
                 {
                     parceleValide.Add((g + 1) * 100 + h);                    //salvare pozitie parcela valida
                 }
@@ -188,10 +188,10 @@ public class GeneratorIncaperi : MonoBehaviour
                 }
             }
         if (g > 0)
-            if (grilaj[g - 1, h] < '6')
+            if (grilaj_primit[g - 1, h] < '6')
             {
-                grilaj[g - 1, h] = (char)((int)grilaj[g - 1, h] + increment);
-                if (grilaj[g - 1, h] == '1')
+                grilaj_primit[g - 1, h] = (char)((int)grilaj_primit[g - 1, h] + increment);
+                if (grilaj_primit[g - 1, h] == '1')
                 {
                     parceleValide.Add((g - 1) * 100 + h);
                 }
@@ -201,10 +201,10 @@ public class GeneratorIncaperi : MonoBehaviour
                 }
             }
         if (h < 13)
-            if (grilaj[g, h + 1] < '6')
+            if (grilaj_primit[g, h + 1] < '6')
             {
-                grilaj[g, h + 1] = (char)((int)grilaj[g, h + 1] + increment);
-                if (grilaj[g, h + 1] == '1')
+                grilaj_primit[g, h + 1] = (char)((int)grilaj_primit[g, h + 1] + increment);
+                if (grilaj_primit[g, h + 1] == '1')
                 {
                     parceleValide.Add(g * 100 + h + 1);
                 }
@@ -214,10 +214,10 @@ public class GeneratorIncaperi : MonoBehaviour
                 }
             }
         if (h > 0)
-            if (grilaj[g, h - 1] < '6')
+            if (grilaj_primit[g, h - 1] < '6')
             {
-                grilaj[g, h - 1] = (char)((int)grilaj[g, h - 1] + increment);
-                if (grilaj[g, h - 1] == '1')
+                grilaj_primit[g, h - 1] = (char)((int)grilaj_primit[g, h - 1] + increment);
+                if (grilaj_primit[g, h - 1] == '1')
                 {
                     parceleValide.Add(g * 100 + h - 1);
                 }
