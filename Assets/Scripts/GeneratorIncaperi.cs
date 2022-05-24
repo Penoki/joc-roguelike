@@ -12,7 +12,7 @@ public class GeneratorIncaperi : MonoBehaviour
                         B = camera zmeului, sef
                         0 = vid
                         1 = cost camera valida
-                     2->6 = cost 
+                     2->6 = cost invalid
     */
     public int camereN = 7;
     public const int marimeTabla = 13;                                   //spatiul maxim de plasare al camerelor
