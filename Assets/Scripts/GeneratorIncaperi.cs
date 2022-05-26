@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Tilemaps;
 
 public class GeneratorIncaperi : MonoBehaviour
 {
@@ -16,13 +17,27 @@ public class GeneratorIncaperi : MonoBehaviour
     */
     public int camereN = 7;
     public const int marimeTabla = 13;                                   //spatiul maxim de plasare al camerelor
-    
+
     public Text arataTablaJoc;
     public int sambure = 8;
     public bool introduManualSamanta = false;
     private float distantaMax = 0;
     private int nrIteratiiTotale = 0;
     private int pozitieIndepartata;
+
+    public Tile[] podeaM, podeaU, podeaLU, coltLU, pereteU, obiecte;
+    public GameObject cameraGrid;
+    //pozitiile obstacolelor
+    public List<int[]> sabloaneSObs = new List<int[]>() { new int[] { -3, 2, -3, 1, -3, -1, -3, -2, -1, 3, -1, 2, -1, -2, -1, -3, 1, 3, 1, 2, 1, -2, 1, -2, 1, -3, 3, 2, 3, 1, 3, -1, 3, -2 },
+                                                          new int[] { -3, 3, -3, -3, -2, 2, -2, -2, 2, 2, 2, -2, 3, 3, 3, -3} };
+    public List<int[]> sabloaneNObs = new List<int[]>() { new int[] { -2, 2, -2, -2, -1, 1, -1, -1, 1, 1, 1, -1, 2, 2, 2, -2},
+                                                          new int[] { -3, 3, -3, -3, 0, 0, 2, 3, 2, -3, 3, 3, 3, 2, 3, -2, 3, -3 } };
+    public List<int[]> sabloaneXObs = new List<int[]>() { new int[] { -2, 2, -2, 1, -2, -1, -2, -2, -1, 2, -1, 1, -1, -1, -1, -2, 1, 2, 1, 1, 1, -1, 1, -2, 2, 2, 2, 1, 2, -1, 2, -2 } };
+    public List<int[]> sabloaneBObs = new List<int[]>() { new int[] { -3, 3, -3, -3, 3, 3, 3, -3},
+                                                          new int[] { -3, 3, -3, 2, -3, 1, -3, -1, -3, -2, -3, -3, 3, 3, 3, 2, 3, 1, 3, -1, 3, -2, 3, -3} };
+    //pozitiile de nastere ale inamicilor
+    public List<int[]> sabloaneNIna = new List<int[]>() { new int[] { -1, 0, 0, 1, 0, 0, 0, -1, 1, 0},
+                                                          new int[] { -2, 3, -2, -3, 1, 3, 1, -3} };
 
     void Start()
     {
@@ -32,6 +47,7 @@ public class GeneratorIncaperi : MonoBehaviour
 
         char[,] grilaj = CreareTablaJoc(sambure);
 
+        CreareCamerePrinAdiacenta('S', Random.Range(0, sabloaneSObs.Count), 0, 0, 0, 0, grilaj);
         #region Afisare Tabla Joc Creata
         arataTablaJoc.text = $"Samanta: {sambure}\n";
         arataTablaJoc.text += "Tabla de joc:\n";
@@ -226,5 +242,197 @@ public class GeneratorIncaperi : MonoBehaviour
                     parceleValide.Remove(g * 100 + h - 1);
                 }
             }
+    }
+
+    private void CreareCamera(char tipCamera, int tipSablon, int cordX, int cordY)
+    {
+        GameObject cs = Instantiate(cameraGrid, new Vector3(cordX, cordY, 0), Quaternion.identity);
+        Tilemap tp1 = cs.transform.GetChild(0).gameObject.GetComponent<Tilemap>();              //template perete
+        Tilemap tp2 = cs.transform.GetChild(1).gameObject.GetComponent<Tilemap>();              //template podea
+        Tilemap to = cs.transform.GetChild(2).gameObject.GetComponent<Tilemap>();               //template obstacole
+
+        //plasare pereti si podea randomizate
+        for (int i = -4; i <= 4; i++)
+        {
+            for (int j = -4; j <= 4; j++)
+            {
+                if ((Mathf.Abs(i) == 4 || Mathf.Abs(j) == 4) && (i != 0 && j != 0)) //pozitie de perete in dreptul ushii/lor
+                {
+                    if (Mathf.Abs(i) == Mathf.Abs(j))
+                    {
+                        //randomizare coltzuri peretzi
+                    }
+                    else
+                    {
+                        if (Random.Range(0, 3) == 1)
+                            tp1.SetTile(new Vector3Int(i, j, 0), pereteU[Random.Range(1, pereteU.Length)]);                 //randomizare o parte din pereti
+                    }
+                }
+                else if ((Mathf.Abs(i) == 3 || Mathf.Abs(j) == 3) && (i != 0 && j != 0))
+                {
+                    if (Mathf.Abs(i) == Mathf.Abs(j))
+                    {
+                        //randomizare coltzuri podea
+                    }
+                    else
+                    {
+                        if (Random.Range(0, 3) == 1)
+                            tp2.SetTile(new Vector3Int(i, j, 0), podeaU[Random.Range(1, podeaU.Length)]);                 //randomizare o parte din podea
+                    }
+                }
+                else
+                {
+                    //randomizare podea mijloc
+                }
+            }
+        }
+
+        //plasare obstacole
+        int sansaObstacol = 8; //80% sa fie plasat
+        switch (tipCamera)
+        {
+            case 'S':
+                int[] a = sabloaneSObs[tipSablon];          //alegere template
+                for (int i = 0; i < a.Length - 1; i += 2)
+                {
+                    if (Random.Range(0, 10) < sansaObstacol)
+                    {
+                        int ob = Random.Range(1, 2);
+                        if (ob == 1)                //verificam daca pica groapa
+                        {
+                            if (to.GetTile(new Vector3Int(a[i], a[i + 1] + 1, 0)) == obiecte[0] || to.GetTile(new Vector3Int(a[i], a[i + 1] + 1, 0)) == obiecte[1])       //verificam daca exista deja o groapa deasupra
+                            {
+                                to.SetTile(new Vector3Int(a[i], a[i + 1], 0), obiecte[0]);
+                            }
+                            else
+                            {
+                                to.SetTile(new Vector3Int(a[i], a[i + 1], 0), obiecte[1]);
+                            }
+                        }
+                    }
+                }
+                break;
+
+            case 'N':
+                int[] b = sabloaneNObs[tipSablon];          //alegere template
+                for (int i = 0; i < b.Length - 1; i += 2)
+                {
+                    if (Random.Range(0, 10) < sansaObstacol)
+                    {
+                        int ob = Random.Range(1, 2);
+                        if (ob == 1)                //verificam daca pica groapa
+                        {
+                            if (to.GetTile(new Vector3Int(b[i], b[i + 1] + 1, 0)) == obiecte[0] || to.GetTile(new Vector3Int(b[i], b[i + 1] + 1, 0)) == obiecte[1])       //verificam daca exista deja o groapa deasupra
+                            {
+                                to.SetTile(new Vector3Int(b[i], b[i + 1], 0), obiecte[0]);
+                            }
+                            else
+                            {
+                                to.SetTile(new Vector3Int(b[i], b[i + 1], 0), obiecte[1]);
+                            }
+                        }
+                    }
+                }
+                //DE FACUT COD PENTRU SPAWNPOINT INAMICI
+                break;
+
+            case 'X':
+                int[] c = sabloaneXObs[tipSablon];          //alegere template
+                for (int i = 0; i < c.Length - 1; i += 2)
+                {
+                    if (Random.Range(0, 10) < sansaObstacol)
+                    {
+                        int ob = Random.Range(1, 2);
+                        if (ob == 1)                //verificam daca pica groapa
+                        {
+                            if (to.GetTile(new Vector3Int(c[i], c[i + 1] + 1, 0)) == obiecte[0] || to.GetTile(new Vector3Int(c[i], c[i + 1] + 1, 0)) == obiecte[1])       //verificam daca exista deja o groapa deasupra
+                            {
+                                to.SetTile(new Vector3Int(c[i], c[i + 1], 0), obiecte[0]);
+                            }
+                            else
+                            {
+                                to.SetTile(new Vector3Int(c[i], c[i + 1], 0), obiecte[1]);
+                            }
+                        }
+                    }
+                }
+                break;
+            case 'B':
+                int[] d = sabloaneBObs[tipSablon];          //alegere template
+                for (int i = 0; i < d.Length - 1; i += 2)
+                {
+                    if (Random.Range(0, 10) < sansaObstacol)
+                    {
+                        int ob = Random.Range(1, 2);
+                        if (ob == 1)                //verificam daca pica groapa
+                        {
+                            if (to.GetTile(new Vector3Int(d[i], d[i + 1] + 1, 0)) == obiecte[0] || to.GetTile(new Vector3Int(d[i], d[i + 1] + 1, 0)) == obiecte[1])       //verificam daca exista deja o groapa deasupra
+                            {
+                                to.SetTile(new Vector3Int(d[i], d[i + 1], 0), obiecte[0]);
+                            }
+                            else
+                            {
+                                to.SetTile(new Vector3Int(d[i], d[i + 1], 0), obiecte[1]);
+                            }
+                        }
+                    }
+                }
+                break;
+        }
+        //plasare obstacole
+    }
+
+    //functie recursiva
+    private void CreareCamerePrinAdiacenta(char tipCamera, int tipSablon, int preCordX, int preCordY, int cordX, int cordY, char[,] grilaj)
+    {
+        int preK = -preCordY / 9 + 6;
+        int preL = preCordX / 9 + 6;
+        int k = -cordY / 9 + 6;
+        int l = cordX / 9 + 6;
+        
+        if ((int)grilaj[k - 1, l] > 64 && (k - 1) != preK)
+        {
+            //mers la camera de sus
+            CreareCamerePrinAdiacenta(grilaj[k - 1, l], CareSablon(grilaj[k - 1, l]), cordX, cordY, cordX, (6 - (k - 1)) * 9, grilaj);          
+        }
+        if((int)grilaj[k + 1, l] > 64 && (k + 1) != preK)
+        {
+            //mers la camera de jos
+            CreareCamerePrinAdiacenta(grilaj[k + 1, l], CareSablon(grilaj[k + 1, l]), cordX, cordY, cordX, (6 - (k + 1)) * 9, grilaj);          
+        }
+        if ((int)grilaj[k, l - 1] > 64 && (l - 1) != preL)
+        {
+            //mers la camera din stanga
+            CreareCamerePrinAdiacenta(grilaj[k, l - 1], CareSablon(grilaj[k, l - 1]), cordX, cordY, ((l - 1) - 6 ) * 9, cordY, grilaj);
+        }
+        if ((int)grilaj[k, l + 1] > 64 && (l + 1) != preL)
+        {
+            //mers la camera din dreapta
+            CreareCamerePrinAdiacenta(grilaj[k, l + 1], CareSablon(grilaj[k, l + 1]), cordX, cordY, ((l + 1) - 6 ) * 9, cordY, grilaj);
+        }
+        
+        //plasare camera curenta
+        CreareCamera(tipCamera, tipSablon, cordX, cordY);
+    }
+
+    private int CareSablon(char tipCamera)
+    {
+        int a = 0;
+        switch (tipCamera)
+        {
+            case 'S':
+                a = Random.Range(0, sabloaneSObs.Count);
+                break;
+            case 'N':
+                a = Random.Range(0, sabloaneNObs.Count);
+                break;
+            case 'X':
+                a = Random.Range(0, sabloaneXObs.Count);
+                break;
+            case 'B':
+                a = Random.Range(0, sabloaneBObs.Count);
+                break;
+        }
+        return a;
     }
 }
