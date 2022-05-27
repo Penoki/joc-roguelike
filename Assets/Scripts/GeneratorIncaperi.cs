@@ -16,7 +16,8 @@ public class GeneratorIncaperi : MonoBehaviour
                      2->6 = cost invalid
     */
     public int camereN = 7;
-    public const int marimeTabla = 13;                                   //spatiul maxim de plasare al camerelor
+    //spatiul maxim de plasare al camerelor 13x13=169
+    public const int marimeTabla = 13;                                   
 
     public Text arataTablaJoc;
     public int sambure = 8;
