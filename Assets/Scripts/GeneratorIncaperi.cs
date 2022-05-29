@@ -17,7 +17,7 @@ public class GeneratorIncaperi : MonoBehaviour
     */
     public int camereN = 7;
     //spatiul maxim de plasare al camerelor 13x13=169
-    public const int marimeTabla = 13;                                   
+    public const int marimeTabla = 13;
 
     public Text arataTablaJoc;
     public int sambure = 8;
@@ -191,7 +191,7 @@ public class GeneratorIncaperi : MonoBehaviour
     private void IncrementareCostAdiacent(ref char[,] grilaj_primit, List<int> parceleValide, int g, int h, int increment)
     {
         //++ cost pozitii adiacente noii camere introduse
-        if (g < 13)                                                 //interzis depasire dimensiuni tabla de joc
+        if (g < 12)                                                 //interzis depasire dimensiuni tabla de joc
             if (grilaj_primit[g + 1, h] < '6')                              //'6' este valoarea maxima de cost posibila
             {
                 grilaj_primit[g + 1, h] = (char)((int)grilaj_primit[g + 1, h] + increment);     //incrementare cost
@@ -217,7 +217,7 @@ public class GeneratorIncaperi : MonoBehaviour
                     parceleValide.Remove((g - 1) * 100 + h);
                 }
             }
-        if (h < 13)
+        if (h < 12)
             if (grilaj_primit[g, h + 1] < '6')
             {
                 grilaj_primit[g, h + 1] = (char)((int)grilaj_primit[g, h + 1] + increment);
@@ -390,28 +390,40 @@ public class GeneratorIncaperi : MonoBehaviour
         int preL = preCordX / 9 + 6;
         int k = -cordY / 9 + 6;
         int l = cordX / 9 + 6;
-        
-        if ((int)grilaj[k - 1, l] > 64 && (k - 1) != preK)
+        if (k != 0)
         {
-            //mers la camera de sus
-            CreareCamerePrinAdiacenta(grilaj[k - 1, l], CareSablon(grilaj[k - 1, l]), cordX, cordY, cordX, (6 - (k - 1)) * 9, grilaj);          
+            if ((int)grilaj[k - 1, l] > 64 && (k - 1) != preK)
+            {
+                //mers la camera de sus
+                CreareCamerePrinAdiacenta(grilaj[k - 1, l], CareSablon(grilaj[k - 1, l]), cordX, cordY, cordX, (6 - (k - 1)) * 9, grilaj);
+            }
         }
-        if((int)grilaj[k + 1, l] > 64 && (k + 1) != preK)
+        if (k != 12)
         {
-            //mers la camera de jos
-            CreareCamerePrinAdiacenta(grilaj[k + 1, l], CareSablon(grilaj[k + 1, l]), cordX, cordY, cordX, (6 - (k + 1)) * 9, grilaj);          
+            if ((int)grilaj[k + 1, l] > 64 && (k + 1) != preK)
+            {
+                //mers la camera de jos
+                CreareCamerePrinAdiacenta(grilaj[k + 1, l], CareSablon(grilaj[k + 1, l]), cordX, cordY, cordX, (6 - (k + 1)) * 9, grilaj);
+            }
         }
-        if ((int)grilaj[k, l - 1] > 64 && (l - 1) != preL)
+        if (l != 0)
         {
-            //mers la camera din stanga
-            CreareCamerePrinAdiacenta(grilaj[k, l - 1], CareSablon(grilaj[k, l - 1]), cordX, cordY, ((l - 1) - 6 ) * 9, cordY, grilaj);
+            if ((int)grilaj[k, l - 1] > 64 && (l - 1) != preL)
+            {
+                //mers la camera din stanga
+                CreareCamerePrinAdiacenta(grilaj[k, l - 1], CareSablon(grilaj[k, l - 1]), cordX, cordY, ((l - 1) - 6) * 9, cordY, grilaj);
+            }
         }
-        if ((int)grilaj[k, l + 1] > 64 && (l + 1) != preL)
+        if (l != 12)
         {
-            //mers la camera din dreapta
-            CreareCamerePrinAdiacenta(grilaj[k, l + 1], CareSablon(grilaj[k, l + 1]), cordX, cordY, ((l + 1) - 6 ) * 9, cordY, grilaj);
+            if ((int)grilaj[k, l + 1] > 64 && (l + 1) != preL)
+            {
+                //mers la camera din dreapta
+                CreareCamerePrinAdiacenta(grilaj[k, l + 1], CareSablon(grilaj[k, l + 1]), cordX, cordY, ((l + 1) - 6) * 9, cordY, grilaj);
+            }
         }
-        
+
+
         //plasare camera curenta
         CreareCamera(tipCamera, tipSablon, cordX, cordY);
     }

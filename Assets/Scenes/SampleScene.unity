@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vitezaMiscare: 2.4
-  pctSanatate: 1000
+  pctSanatate: 5
   timpInvincibil: 1
   rb: {fileID: 200438070}
   animator: {fileID: 200438074}
@@ -1307,7 +1307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camereN: 3
   arataTablaJoc: {fileID: 1241699191}
-  sambure: 5384
+  sambure: 748
   introduManualSamanta: 0
   podeaM:
   - {fileID: 11400000, guid: 5c01865107f4b0c408828fbfedf0a892, type: 2}
