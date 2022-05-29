@@ -27,7 +27,7 @@ public class GeneratorIncaperi : MonoBehaviour
     private int pozitieIndepartata;
 
     public Tile[] podeaM, podeaU, podeaLU, coltLU, pereteU, obiecte;
-    public GameObject cameraGrid;
+    public GameObject cameraGrid, usaSus, usaJos, usaStanga, usaDreapta;
     //pozitiile obstacolelor
     public List<int[]> sabloaneSObs = new List<int[]>() { new int[] { -3, 2, -3, 1, -3, -1, -3, -2, -1, 3, -1, 2, -1, -2, -1, -3, 1, 3, 1, 2, 1, -2, 1, -2, 1, -3, 3, 2, 3, 1, 3, -1, 3, -2 },
                                                           new int[] { -3, 3, -3, -3, -2, 2, -2, -2, 2, 2, 2, -2, 3, 3, 3, -3} };
@@ -48,7 +48,7 @@ public class GeneratorIncaperi : MonoBehaviour
 
         char[,] grilaj = CreareTablaJoc(sambure);
 
-        CreareCamerePrinAdiacenta('S', Random.Range(0, sabloaneSObs.Count), 0, 0, 0, 0, grilaj);
+        CreareCamerePrinAdiacenta('S', Random.Range(0, sabloaneSObs.Count), 0, 0, 0, 0, grilaj, null);
         #region Afisare Tabla Joc Creata
         arataTablaJoc.text = $"Samanta: {sambure}\n";
         arataTablaJoc.text += "Tabla de joc:\n";
@@ -245,12 +245,12 @@ public class GeneratorIncaperi : MonoBehaviour
             }
     }
 
-    private void CreareCamera(char tipCamera, int tipSablon, int cordX, int cordY)
+    private GameObject CreareCamera(char tipCamera, int tipSablon, int cordX, int cordY)
     {
-        GameObject cs = Instantiate(cameraGrid, new Vector3(cordX, cordY, 0), Quaternion.identity);
-        Tilemap tp1 = cs.transform.GetChild(0).gameObject.GetComponent<Tilemap>();              //template perete
-        Tilemap tp2 = cs.transform.GetChild(1).gameObject.GetComponent<Tilemap>();              //template podea
-        Tilemap to = cs.transform.GetChild(2).gameObject.GetComponent<Tilemap>();               //template obstacole
+        GameObject camera = Instantiate(cameraGrid, new Vector3(cordX, cordY, 0), Quaternion.identity);
+        Tilemap tp1 = camera.transform.GetChild(0).gameObject.GetComponent<Tilemap>();              //template perete
+        Tilemap tp2 = camera.transform.GetChild(1).gameObject.GetComponent<Tilemap>();              //template podea
+        Tilemap to = camera.transform.GetChild(2).gameObject.GetComponent<Tilemap>();               //template obstacole
 
         //plasare pereti si podea randomizate
         for (int i = -4; i <= 4; i++)
@@ -380,52 +380,108 @@ public class GeneratorIncaperi : MonoBehaviour
                 }
                 break;
         }
-        //plasare obstacole
+
+        return camera;
     }
 
     //functie recursiva
-    private void CreareCamerePrinAdiacenta(char tipCamera, int tipSablon, int preCordX, int preCordY, int cordX, int cordY, char[,] grilaj)
+    private void CreareCamerePrinAdiacenta(char tipCamera, int tipSablon, int preCordX, int preCordY, int cordX, int cordY, char[,] grilaj, GameObject usa)
     {
         int preK = -preCordY / 9 + 6;
         int preL = preCordX / 9 + 6;
         int k = -cordY / 9 + 6;
         int l = cordX / 9 + 6;
-        if (k != 0)
+
+        //plasare camera curenta
+        GameObject cameraCurenta = CreareCamera(tipCamera, tipSablon, cordX, cordY);
+
+        //plasare usa complementara primei
+        if (usa != null)
+        {
+            if(usa.name.Contains(usaSus.name))
+            {
+                //plasarea unei usi in camera curenta(parinte) catre camera de jos
+                GameObject usa2 = Instantiate(usaJos, cameraCurenta.transform);
+
+                //legarea usilor
+                usa.GetComponent<Teleportinator>().destinatie = usa2.transform.GetChild(0).transform;
+                usa2.GetComponent<Teleportinator>().destinatie = usa.transform.GetChild(0).transform;
+            }
+            if (usa.name.Contains(usaJos.name))
+            {
+                //plasarea unei usi in camera curenta(parinte) catre camera de sus
+                GameObject usa2 = Instantiate(usaSus, cameraCurenta.transform);
+
+                //legarea usilor
+                usa.GetComponent<Teleportinator>().destinatie = usa2.transform.GetChild(0).transform;
+                usa2.GetComponent<Teleportinator>().destinatie = usa.transform.GetChild(0).transform;
+            }
+            if (usa.name.Contains(usaStanga.name))
+            {
+                
+                //plasarea unei usi in camera curenta(parinte) catre camera din dreapta
+                GameObject usa2 = Instantiate(usaDreapta, cameraCurenta.transform);
+
+                //legarea usilor
+                usa.GetComponent<Teleportinator>().destinatie = usa2.transform.GetChild(0).transform;
+                usa2.GetComponent<Teleportinator>().destinatie = usa.transform.GetChild(0).transform;
+                
+            }
+            if (usa.name.Contains(usaDreapta.name))
+            {
+                //plasarea unei usi in camera curenta(parinte) catre camera din stanga
+                GameObject usa2 = Instantiate(usaStanga, cameraCurenta.transform);
+
+                //legarea usilor
+                usa.GetComponent<Teleportinator>().destinatie = usa2.transform.GetChild(0).transform;
+                usa2.GetComponent<Teleportinator>().destinatie = usa.transform.GetChild(0).transform;
+            }
+        }
+
+            if (k != 0)
         {
             if ((int)grilaj[k - 1, l] > 64 && (k - 1) != preK)
             {
+                //plasarea primei usi in camera curenta(parinte) catre camera de sus
+                GameObject usa1a = Instantiate(usaSus, cameraCurenta.transform);
+
                 //mers la camera de sus
-                CreareCamerePrinAdiacenta(grilaj[k - 1, l], CareSablon(grilaj[k - 1, l]), cordX, cordY, cordX, (6 - (k - 1)) * 9, grilaj);
+                CreareCamerePrinAdiacenta(grilaj[k - 1, l], CareSablon(grilaj[k - 1, l]), cordX, cordY, cordX, (6 - (k - 1)) * 9, grilaj, usa1a);
             }
         }
         if (k != 12)
         {
             if ((int)grilaj[k + 1, l] > 64 && (k + 1) != preK)
             {
+                //plasarea primei usi in camera curenta(parinte) catre camera de jos
+                GameObject usa1b = Instantiate(usaJos, cameraCurenta.transform);
+
                 //mers la camera de jos
-                CreareCamerePrinAdiacenta(grilaj[k + 1, l], CareSablon(grilaj[k + 1, l]), cordX, cordY, cordX, (6 - (k + 1)) * 9, grilaj);
+                CreareCamerePrinAdiacenta(grilaj[k + 1, l], CareSablon(grilaj[k + 1, l]), cordX, cordY, cordX, (6 - (k + 1)) * 9, grilaj, usa1b);
             }
         }
         if (l != 0)
         {
             if ((int)grilaj[k, l - 1] > 64 && (l - 1) != preL)
             {
+                //plasarea primei usi in camera curenta(parinte) catre camera din stanga
+                GameObject usa1c = Instantiate(usaStanga, cameraCurenta.transform);
+
                 //mers la camera din stanga
-                CreareCamerePrinAdiacenta(grilaj[k, l - 1], CareSablon(grilaj[k, l - 1]), cordX, cordY, ((l - 1) - 6) * 9, cordY, grilaj);
+                CreareCamerePrinAdiacenta(grilaj[k, l - 1], CareSablon(grilaj[k, l - 1]), cordX, cordY, ((l - 1) - 6) * 9, cordY, grilaj, usa1c);
             }
         }
         if (l != 12)
         {
             if ((int)grilaj[k, l + 1] > 64 && (l + 1) != preL)
             {
+                //plasarea primei usi in camera curenta(parinte) catre camera din dreapta
+                GameObject usa1d = Instantiate(usaDreapta, cameraCurenta.transform);
+
                 //mers la camera din dreapta
-                CreareCamerePrinAdiacenta(grilaj[k, l + 1], CareSablon(grilaj[k, l + 1]), cordX, cordY, ((l + 1) - 6) * 9, cordY, grilaj);
+                CreareCamerePrinAdiacenta(grilaj[k, l + 1], CareSablon(grilaj[k, l + 1]), cordX, cordY, ((l + 1) - 6) * 9, cordY, grilaj, usa1d);
             }
         }
-
-
-        //plasare camera curenta
-        CreareCamera(tipCamera, tipSablon, cordX, cordY);
     }
 
     private int CareSablon(char tipCamera)

@@ -1,0 +1,19 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Teleportinator : MonoBehaviour
+{
+    public bool deschisa = true;
+    public Transform destinatie;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.transform.tag == "Player" && deschisa)
+        {
+            collision.transform.position = destinatie.position;
+            //destinatie.GetComponentInParent<Teleportinator>().deschisa = true;
+        }
+    }
+
+}
