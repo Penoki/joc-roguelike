@@ -122,6 +122,7 @@ public class Cap : MonoBehaviour
         GameObject proiectilNou = Instantiate(proiectilPrototip, poz.position, poz.rotation) as GameObject;
 
         //transmitere valori ale proprietatilor catre obiectul nou instantiat
+        proiectilNou.GetComponent<Ochi>().CatDauna = dauna;
         proiectilNou.GetComponent<Ochi>().VitProiectil = viteza;
         proiectilNou.GetComponent<Ochi>().VectorMiscareOchi = directie;
         proiectilNou.GetComponent<Ochi>().DistProiectil = distanta;

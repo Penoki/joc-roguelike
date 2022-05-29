@@ -7,6 +7,8 @@ public class Ochi : MonoBehaviour
     private Rigidbody2D rbProiectil;
     private float vitProiectil;
     private float distProiectil;
+    private double catDauna;
+    private bool patrunzator = false;
     Vector2 vectorMiscareOchi;
 
     //getter si setter pentru apelarea acestor variabile din alta clasa
@@ -14,6 +16,7 @@ public class Ochi : MonoBehaviour
     public float VitProiectil { get => vitProiectil; set => vitProiectil = value; }
     public Vector2 VectorMiscareOchi { get => vectorMiscareOchi; set => vectorMiscareOchi = value; }
     public float DistProiectil { get => distProiectil; set => distProiectil = value; }
+    public double CatDauna { get => catDauna; set => catDauna = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +28,13 @@ public class Ochi : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(!patrunzator)
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     //FixedUpdate este mai de incredere pentru fizici
     //este apelata 50 de ori pe secunda

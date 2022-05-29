@@ -10,6 +10,7 @@ public class Urmarirea : MonoBehaviour
     public float netezire;
     void FixedUpdate()
     {
+        if(tinta!=null)
         Urmareste();
     }
 

@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 200438074}
   m_Layer: 0
   m_Name: Jucator
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -278,8 +278,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vitezaMiscare: 2.4
+  pctSanatate: 1000
+  timpInvincibil: 1
   rb: {fileID: 200438070}
   animator: {fileID: 200438074}
+  srJ: {fileID: 200438069}
+  srC: {fileID: 847336951}
 --- !u!70 &200438073
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -929,6 +933,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ff26c7c2f353649b480040d9225645, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sr: {fileID: 1536037811}
+  sanatate: 10
+  ranireRacireSec: 1
+  jucator: {fileID: 200438068}
+  ranit: 0
+  atingere: 0
 --- !u!70 &1536037816
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
