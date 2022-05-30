@@ -262,11 +262,14 @@ public class GeneratorIncaperi : MonoBehaviour
                     if (Mathf.Abs(i) == Mathf.Abs(j))
                     {
                         //randomizare coltzuri peretzi
+                        if (Random.Range(0, 3) == 1)
+                            tp1.SetTile(new Vector3Int(i, j, 0), coltLU[Random.Range(1, coltLU.Length)]);
                     }
                     else
                     {
+                        //randomizare o parte din pereti
                         if (Random.Range(0, 3) == 1)
-                            tp1.SetTile(new Vector3Int(i, j, 0), pereteU[Random.Range(1, pereteU.Length)]);                 //randomizare o parte din pereti
+                            tp1.SetTile(new Vector3Int(i, j, 0), pereteU[Random.Range(1, pereteU.Length)]);                 
                     }
                 }
                 else if ((Mathf.Abs(i) == 3 || Mathf.Abs(j) == 3) && (i != 0 && j != 0))
@@ -277,13 +280,16 @@ public class GeneratorIncaperi : MonoBehaviour
                     }
                     else
                     {
+                        //randomizare o parte din podea
                         if (Random.Range(0, 3) == 1)
-                            tp2.SetTile(new Vector3Int(i, j, 0), podeaU[Random.Range(1, podeaU.Length)]);                 //randomizare o parte din podea
+                            tp2.SetTile(new Vector3Int(i, j, 0), podeaU[Random.Range(1, podeaU.Length)]);                 
                     }
                 }
-                else
+                else if ((i != 0 && j != 0))
                 {
                     //randomizare podea mijloc
+                    if (Random.Range(0, 3) == 1)
+                        tp2.SetTile(new Vector3Int(i, j, 0), podeaM[Random.Range(1, podeaM.Length)]);
                 }
             }
         }

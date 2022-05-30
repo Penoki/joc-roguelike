@@ -1553,9 +1553,13 @@ MonoBehaviour:
   camereN: 3
   arataTablaJoc: {fileID: 1241699191}
   sambure: 470
-  introduManualSamanta: 1
+  introduManualSamanta: 0
   podeaM:
   - {fileID: 11400000, guid: 5c01865107f4b0c408828fbfedf0a892, type: 2}
+  - {fileID: 11400000, guid: 2cd480ce49afab841a510c549e9a6898, type: 2}
+  - {fileID: 11400000, guid: 13949658757931d4781305617fecf6fa, type: 2}
+  - {fileID: 11400000, guid: e14035b08d1acb64d89e94e15b9bfefa, type: 2}
+  - {fileID: 11400000, guid: 1216f3fe5e3a7924eb2f2ac0833494fd, type: 2}
   podeaU:
   - {fileID: 11400000, guid: 5dd9f92437532ce4085f4477d75a112a, type: 2}
   - {fileID: 11400000, guid: 9ae322b38c4bc554b9794e9fac2fa9dc, type: 2}
@@ -1563,6 +1567,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3fbf7153c17f5b041a73f0eac9628a15, type: 2}
   coltLU:
   - {fileID: 11400000, guid: fc2b9aee12318a845891a41c16282745, type: 2}
+  - {fileID: 11400000, guid: 92aa4f9e187cec74b9f203c42c19d69e, type: 2}
+  - {fileID: 11400000, guid: 59d9b7cffdbc1914d8f292f427a5c2c2, type: 2}
+  - {fileID: 11400000, guid: 9bc8c37b38a0fdb4f90a406a98c9a8b3, type: 2}
+  - {fileID: 11400000, guid: 7814f36b1d6eda549a46dd2bc9c11e87, type: 2}
   pereteU:
   - {fileID: 11400000, guid: 593ecec841bcbb94787351c60262fe4f, type: 2}
   - {fileID: 11400000, guid: e49f4fbccdeda8f4ebd268d6aacd0d3c, type: 2}
