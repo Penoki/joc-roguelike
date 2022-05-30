@@ -30,7 +30,7 @@ public class Ochi : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!patrunzator && (collision.transform.tag == "pereti" || collision.transform.tag == "inamic"))
+        if(!patrunzator && (collision.transform.tag == "pereti" || collision.transform.tag == "inamic" || collision.transform.tag == "obstacol"))
         {
             Destroy(this.gameObject);
         }

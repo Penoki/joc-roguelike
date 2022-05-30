@@ -8,6 +8,7 @@ TagManager:
   - usa
   - inamic
   - pereti
+  - obstacol
   layers:
   - Default
   - TransparentFX

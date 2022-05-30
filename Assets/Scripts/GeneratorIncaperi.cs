@@ -28,6 +28,7 @@ public class GeneratorIncaperi : MonoBehaviour
 
     public Tile[] podeaM, podeaU, podeaLU, coltLU, pereteU, obiecte;
     public GameObject cameraGrid, usaSus, usaJos, usaStanga, usaDreapta;
+    public GameObject[] obstacol;
     //pozitiile obstacolelor
     public List<int[]> sabloaneSObs = new List<int[]>() { new int[] { -3, 2, -3, 1, -3, -1, -3, -2, -1, 3, -1, 2, -1, -2, -1, -3, 1, 3, 1, 2, 1, -2, 1, -2, 1, -3, 3, 2, 3, 1, 3, -1, 3, -2 },
                                                           new int[] { -3, 3, -3, -3, -2, 2, -2, -2, 2, 2, 2, -2, 3, 3, 3, -3} };
@@ -269,7 +270,7 @@ public class GeneratorIncaperi : MonoBehaviour
                     {
                         //randomizare o parte din pereti
                         if (Random.Range(0, 3) == 1)
-                            tp1.SetTile(new Vector3Int(i, j, 0), pereteU[Random.Range(1, pereteU.Length)]);                 
+                            tp1.SetTile(new Vector3Int(i, j, 0), pereteU[Random.Range(1, pereteU.Length)]);
                     }
                 }
                 else if ((Mathf.Abs(i) == 3 || Mathf.Abs(j) == 3) && (i != 0 && j != 0))
@@ -282,7 +283,7 @@ public class GeneratorIncaperi : MonoBehaviour
                     {
                         //randomizare o parte din podea
                         if (Random.Range(0, 3) == 1)
-                            tp2.SetTile(new Vector3Int(i, j, 0), podeaU[Random.Range(1, podeaU.Length)]);                 
+                            tp2.SetTile(new Vector3Int(i, j, 0), podeaU[Random.Range(1, podeaU.Length)]);
                     }
                 }
                 else if ((i != 0 && j != 0))
@@ -304,7 +305,7 @@ public class GeneratorIncaperi : MonoBehaviour
                 {
                     if (Random.Range(0, 10) < sansaObstacol)
                     {
-                        int ob = Random.Range(1, 2);
+                        int ob = Random.Range(1, 4);
                         if (ob == 1)                //verificam daca pica groapa
                         {
                             if (to.GetTile(new Vector3Int(a[i], a[i + 1] + 1, 0)) == obiecte[0] || to.GetTile(new Vector3Int(a[i], a[i + 1] + 1, 0)) == obiecte[1])       //verificam daca exista deja o groapa deasupra
@@ -314,6 +315,29 @@ public class GeneratorIncaperi : MonoBehaviour
                             else
                             {
                                 to.SetTile(new Vector3Int(a[i], a[i + 1], 0), obiecte[1]);
+                            }
+                        }
+                        if (ob == 2)
+                        {
+                            //plasam cutie
+                            GameObject cutie = Instantiate(obstacol[0], camera.transform);
+                            cutie.transform.position = new Vector3(cutie.transform.position.x + a[i], cutie.transform.position.y + a[i + 1], 0);
+                            if (Random.Range(0, 2) == 1)
+                            {
+                                //flip orizontal la cutie
+                                cutie.transform.localScale = new Vector3(-1, 1, 1);
+                            }
+                        }
+
+                        if (ob == 3)
+                        {
+                            //plasam vaza
+                            GameObject vaza = Instantiate(obstacol[1], camera.transform);
+                            vaza.transform.position = new Vector3(vaza.transform.position.x + a[i], vaza.transform.position.y + a[i + 1], 0);
+                            if (Random.Range(0, 2) == 1)
+                            {
+                                //flip orizontal la vaza
+                                vaza.transform.localScale = new Vector3(-1, 1, 1);
                             }
                         }
                     }
@@ -326,7 +350,7 @@ public class GeneratorIncaperi : MonoBehaviour
                 {
                     if (Random.Range(0, 10) < sansaObstacol)
                     {
-                        int ob = Random.Range(1, 2);
+                        int ob = Random.Range(1, 4);
                         if (ob == 1)                //verificam daca pica groapa
                         {
                             if (to.GetTile(new Vector3Int(b[i], b[i + 1] + 1, 0)) == obiecte[0] || to.GetTile(new Vector3Int(b[i], b[i + 1] + 1, 0)) == obiecte[1])       //verificam daca exista deja o groapa deasupra
@@ -336,6 +360,29 @@ public class GeneratorIncaperi : MonoBehaviour
                             else
                             {
                                 to.SetTile(new Vector3Int(b[i], b[i + 1], 0), obiecte[1]);
+                            }
+                        }
+                        if (ob == 2)
+                        {
+                            //plasam cutie
+                            GameObject cutie = Instantiate(obstacol[0], camera.transform);
+                            cutie.transform.position = new Vector3(cutie.transform.position.x +b[i], cutie.transform.position.y + b[i + 1], 0);
+                            if (Random.Range(0, 2) == 1)
+                            {
+                                //flip orizontal la cutie
+                                cutie.transform.localScale = new Vector3(-1, 1, 1);
+                            }
+                        }
+
+                        if (ob == 3)
+                        {
+                            //plasam vaza
+                            GameObject vaza = Instantiate(obstacol[1], camera.transform);
+                            vaza.transform.position = new Vector3(vaza.transform.position.x + b[i], vaza.transform.position.y + b[i + 1], 0);
+                            if (Random.Range(0, 2) == 1)
+                            {
+                                //flip orizontal la vaza
+                                vaza.transform.localScale = new Vector3(-1, 1, 1);
                             }
                         }
                     }
@@ -349,7 +396,7 @@ public class GeneratorIncaperi : MonoBehaviour
                 {
                     if (Random.Range(0, 10) < sansaObstacol)
                     {
-                        int ob = Random.Range(1, 2);
+                        int ob = Random.Range(1, 4);
                         if (ob == 1)                //verificam daca pica groapa
                         {
                             if (to.GetTile(new Vector3Int(c[i], c[i + 1] + 1, 0)) == obiecte[0] || to.GetTile(new Vector3Int(c[i], c[i + 1] + 1, 0)) == obiecte[1])       //verificam daca exista deja o groapa deasupra
@@ -361,6 +408,29 @@ public class GeneratorIncaperi : MonoBehaviour
                                 to.SetTile(new Vector3Int(c[i], c[i + 1], 0), obiecte[1]);
                             }
                         }
+                        if (ob == 2)
+                        {
+                            //plasam cutie
+                            GameObject cutie = Instantiate(obstacol[0], camera.transform);
+                            cutie.transform.position = new Vector3(cutie.transform.position.x + c[i], cutie.transform.position.y + c[i + 1], 0);
+                            if (Random.Range(0, 2) == 1)
+                            {
+                                //flip orizontal la cutie
+                                cutie.transform.localScale = new Vector3(-1, 1, 1);
+                            }
+                        }
+
+                        if (ob == 3)
+                        {
+                            //plasam vaza
+                            GameObject vaza = Instantiate(obstacol[1], camera.transform);
+                            vaza.transform.position = new Vector3(vaza.transform.position.x + c[i], vaza.transform.position.y + c[i + 1], 0);
+                            if (Random.Range(0, 2) == 1)
+                            {
+                                //flip orizontal la vaza
+                                vaza.transform.localScale = new Vector3(-1, 1, 1);
+                            }
+                        }
                     }
                 }
                 break;
@@ -370,7 +440,7 @@ public class GeneratorIncaperi : MonoBehaviour
                 {
                     if (Random.Range(0, 10) < sansaObstacol)
                     {
-                        int ob = Random.Range(1, 2);
+                        int ob = Random.Range(1, 4);
                         if (ob == 1)                //verificam daca pica groapa
                         {
                             if (to.GetTile(new Vector3Int(d[i], d[i + 1] + 1, 0)) == obiecte[0] || to.GetTile(new Vector3Int(d[i], d[i + 1] + 1, 0)) == obiecte[1])       //verificam daca exista deja o groapa deasupra
@@ -380,6 +450,29 @@ public class GeneratorIncaperi : MonoBehaviour
                             else
                             {
                                 to.SetTile(new Vector3Int(d[i], d[i + 1], 0), obiecte[1]);
+                            }
+                        }
+                        if (ob == 2)
+                        {
+                            //plasam cutie
+                            GameObject cutie = Instantiate(obstacol[0], camera.transform);
+                            cutie.transform.position = new Vector3(cutie.transform.position.x + d[i], cutie.transform.position.y + d[i + 1], 0);
+                            if (Random.Range(0, 2) == 1)
+                            {
+                                //flip orizontal la cutie
+                                cutie.transform.localScale = new Vector3(-1, 1, 1);
+                            }
+                        }
+
+                        if (ob == 3)
+                        {
+                            //plasam vaza
+                            GameObject vaza = Instantiate(obstacol[1], camera.transform);
+                            vaza.transform.position = new Vector3(vaza.transform.position.x + d[i], vaza.transform.position.y + d[i + 1], 0);
+                            if (Random.Range(0, 2) == 1)
+                            {
+                                //flip orizontal la vaza
+                                vaza.transform.localScale = new Vector3(-1, 1, 1);
                             }
                         }
                     }
@@ -404,7 +497,7 @@ public class GeneratorIncaperi : MonoBehaviour
         //plasare usa complementara primei
         if (usa != null)
         {
-            if(usa.name.Contains(usaSus.name))
+            if (usa.name.Contains(usaSus.name))
             {
                 //plasarea unei usi in camera curenta(parinte) catre camera de jos
                 GameObject usa2 = Instantiate(usaJos, cameraCurenta.transform);
@@ -424,14 +517,14 @@ public class GeneratorIncaperi : MonoBehaviour
             }
             if (usa.name.Contains(usaStanga.name))
             {
-                
+
                 //plasarea unei usi in camera curenta(parinte) catre camera din dreapta
                 GameObject usa2 = Instantiate(usaDreapta, cameraCurenta.transform);
 
                 //legarea usilor
                 usa.GetComponent<Teleportinator>().destinatie = usa2.transform.GetChild(0).transform;
                 usa2.GetComponent<Teleportinator>().destinatie = usa.transform.GetChild(0).transform;
-                
+
             }
             if (usa.name.Contains(usaDreapta.name))
             {
@@ -444,7 +537,7 @@ public class GeneratorIncaperi : MonoBehaviour
             }
         }
 
-            if (k != 0)
+        if (k != 0)
         {
             if ((int)grilaj[k - 1, l] > 64 && (k - 1) != preK)
             {
