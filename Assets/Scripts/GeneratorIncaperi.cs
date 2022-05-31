@@ -30,7 +30,7 @@ public class GeneratorIncaperi : MonoBehaviour
     public GameObject cameraGrid, usaSus, usaJos, usaStanga, usaDreapta;
     public GameObject[] obstacol;
     //pozitiile obstacolelor
-    public List<int[]> sabloaneSObs = new List<int[]>() { new int[] { -3, 2, -3, 1, -3, -1, -3, -2, -1, 3, -1, 2, -1, -2, -1, -3, 1, 3, 1, 2, 1, -2, 1, -2, 1, -3, 3, 2, 3, 1, 3, -1, 3, -2 },
+    public List<int[]> sabloaneSObs = new List<int[]>() { new int[] { -3, 2, -3, 1, -3, -1, -3, -2, -1, 3, -1, 2, -1, -2, -1, -3, 1, 3, 1, 2, 1, -2, 1, -3, 3, 2, 3, 1, 3, -1, 3, -2 },
                                                           new int[] { -3, 3, -3, -3, -2, 2, -2, -2, 2, 2, 2, -2, 3, 3, 3, -3} };
     public List<int[]> sabloaneNObs = new List<int[]>() { new int[] { -2, 2, -2, -2, -1, 1, -1, -1, 1, 1, 1, -1, 2, 2, 2, -2},
                                                           new int[] { -3, 3, -3, -3, 0, 0, 2, 3, 2, -3, 3, 3, 3, 2, 3, -2, 3, -3 } };
@@ -48,8 +48,8 @@ public class GeneratorIncaperi : MonoBehaviour
         Random.InitState(sambure);
 
         char[,] grilaj = CreareTablaJoc(sambure);
-
         CreareCamerePrinAdiacenta('S', Random.Range(0, sabloaneSObs.Count), 0, 0, 0, 0, grilaj, null);
+
         #region Afisare Tabla Joc Creata
         arataTablaJoc.text = $"Samanta: {sambure}\n";
         arataTablaJoc.text += "Tabla de joc:\n";
@@ -66,7 +66,7 @@ public class GeneratorIncaperi : MonoBehaviour
             arataTablaJoc.text += "\n";
             nrIteratiiTotale++;
         }
-        arataTablaJoc.text += $"\n Numar iteratii totale: {nrIteratiiTotale}";
+        //arataTablaJoc.text += $"\n Numar iteratii totale: {nrIteratiiTotale}";
         #endregion
     }
 
@@ -340,6 +340,8 @@ public class GeneratorIncaperi : MonoBehaviour
                                 vaza.transform.localScale = new Vector3(-1, 1, 1);
                             }
                         }
+                        //trimitere detalii despre unde se afla obstacole in camera aceasta
+                        camera.GetComponent<detaliiIncapere>().obstacoleCurente.Add(new Vector2Int(a[i], a[i + 1]));
                     }
                 }
                 break;
@@ -366,7 +368,7 @@ public class GeneratorIncaperi : MonoBehaviour
                         {
                             //plasam cutie
                             GameObject cutie = Instantiate(obstacol[0], camera.transform);
-                            cutie.transform.position = new Vector3(cutie.transform.position.x +b[i], cutie.transform.position.y + b[i + 1], 0);
+                            cutie.transform.position = new Vector3(cutie.transform.position.x + b[i], cutie.transform.position.y + b[i + 1], 0);
                             if (Random.Range(0, 2) == 1)
                             {
                                 //flip orizontal la cutie
@@ -385,9 +387,17 @@ public class GeneratorIncaperi : MonoBehaviour
                                 vaza.transform.localScale = new Vector3(-1, 1, 1);
                             }
                         }
+                        //trimitere detalii despre unde se afla obstacole in camera aceasta
+                        camera.GetComponent<detaliiIncapere>().obstacoleCurente.Add(new Vector2Int(b[i], b[i + 1]));
                     }
                 }
-                //DE FACUT COD PENTRU SPAWNPOINT INAMICI
+                //cod pentru plasarea punctelor de materializare ale inamicilor
+                int[] b1 = sabloaneNIna[tipSablon];
+                for (int i = 0; i < b1.Length - 1; i += 2)
+                {
+                    camera.GetComponent<detaliiIncapere>().puncteMaterializare.Add(new Vector2Int(b1[i], b1[i + 1]));
+                }
+
                 break;
 
             case 'X':
@@ -431,6 +441,8 @@ public class GeneratorIncaperi : MonoBehaviour
                                 vaza.transform.localScale = new Vector3(-1, 1, 1);
                             }
                         }
+                        //trimitere detalii despre unde se afla obstacole in camera aceasta
+                        camera.GetComponent<detaliiIncapere>().obstacoleCurente.Add(new Vector2Int(c[i], c[i + 1]));
                     }
                 }
                 break;
@@ -475,11 +487,14 @@ public class GeneratorIncaperi : MonoBehaviour
                                 vaza.transform.localScale = new Vector3(-1, 1, 1);
                             }
                         }
+                        //trimitere detalii despre unde se afla obstacole in camera aceasta
+                        camera.GetComponent<detaliiIncapere>().obstacoleCurente.Add(new Vector2Int(d[i], d[i + 1]));
                     }
                 }
                 break;
         }
 
+        camera.GetComponent<detaliiIncapere>().ActualizareGrilaCamera();
         return camera;
     }
 
