@@ -59,6 +59,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc2d14c48a3dc9044a017408cfba8b5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obstacoleCurente: []
+  puncteMaterializare: []
 --- !u!1 &8341474655913680959
 GameObject:
   m_ObjectHideFlags: 0
@@ -71,7 +73,7 @@ GameObject:
   - component: {fileID: 8341474655913680956}
   - component: {fileID: 8341474655913680957}
   - component: {fileID: 8341474655913680955}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Perete
   m_TagString: pereti
   m_Icon: {fileID: 0}
@@ -589,7 +591,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.007936537, y: 0.007936537, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -624,7 +626,7 @@ GameObject:
   - component: {fileID: 8341474656567810330}
   - component: {fileID: 8341474656567810331}
   - component: {fileID: 8341474656567810329}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Obstacol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1496,7 +1498,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.007936537, y: 0.007936537, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0

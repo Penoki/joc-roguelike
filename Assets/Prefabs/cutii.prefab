@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6068799332347478460}
   - component: {fileID: 6068799332347478462}
   - component: {fileID: 6068799332347478463}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: cutii
   m_TagString: obstacol
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.7}
-    oldSize: {x: 1, y: 1.28125}
+    oldSize: {x: 1.0158731, y: 1.3015873}
     newSize: {x: 1, y: 1.28125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
