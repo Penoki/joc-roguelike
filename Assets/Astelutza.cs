@@ -4,19 +4,8 @@ using UnityEngine;
 
 public class Astelutza : MonoBehaviour
 {
-    struct NOD
-    {
-        Vector2Int poz;
-        int Gcost, Hcost, Fcost;
-
-        public Vector2Int Poz { get => poz; set => poz = value; }
-        public int Gcost1 { get => Gcost; set => Gcost = value; }
-        public int Hcost1 { get => Hcost; set => Hcost = value; }
-        public int Fcost1 { get => Fcost; set => Fcost = value; }
-    }
-
-    private List<NOD> OPEN = new List<NOD>();       //nodurile care trebuie sa fie evaluate
-    private List<NOD> CLOSED = new List<NOD>();     //nodurile care au fost deja evaluate
+    private List<Nod> OPEN = new List<Nod>();       //nodurile care trebuie sa fie evaluate
+    private List<Nod> CLOSED = new List<Nod>();     //nodurile care au fost deja evaluate
     public GameObject tzinta, gridParinte;          //jucatorul in cazul de fata
     public Rigidbody2D rb;
     public int[,] grilajCurent;                     //camera cu obstacole
@@ -43,12 +32,10 @@ public class Astelutza : MonoBehaviour
 
     private void Astea()
     {
-        //1 adaugare NOD de start in OPEN
-        NOD start = new NOD { };
-        //adaugare pozitie in NOD
-        start.Poz = new Vector2Int(conv_y_IN_i(Mathf.FloorToInt(rb.position.y)), conv_x_IN_j(Mathf.FloorToInt(rb.position.x)));
-        //calcul costuri
-        Calcul(start);
+        //initializare start si final
+        Nod start = new Nod(new Vector2Int(conv_y_IN_i(Mathf.FloorToInt(rb.position.y)), conv_x_IN_j(Mathf.FloorToInt(rb.position.x))));
+        Nod final = new Nod(new Vector2Int(Mathf.FloorToInt(tzinta.GetComponent<Rigidbody2D>().position.y), Mathf.FloorToInt(tzinta.GetComponent<Rigidbody2D>().position.x)));
+
         //adauga in open pentru evaluare
         OPEN.Add(start);
 
@@ -56,10 +43,10 @@ public class Astelutza : MonoBehaviour
         while (OPEN.Count > 0)
         {
             //cautare NOD in OPEN cu cel mai mic cost F
-            NOD curent = OPEN[0];
-            foreach (NOD a in OPEN)
+            Nod curent = OPEN[0];
+            foreach (Nod a in OPEN)
             {
-                if (a.Fcost1 < curent.Fcost1 || (a.Fcost1==curent.Fcost1 && a.Hcost1<curent.Hcost1))
+                if (a.Fcost < curent.Fcost || (a.Fcost == curent.Fcost && a.Hcost < curent.Hcost))
                 {
                     curent = a;
                 }
@@ -69,67 +56,89 @@ public class Astelutza : MonoBehaviour
             CLOSED.Add(curent);
 
             //daca NOD coincide cu tzinta, atunci ne oprim
-            if (curent.Poz == new Vector2(Mathf.FloorToInt(tzinta.GetComponent<Rigidbody2D>().position.y), Mathf.FloorToInt(tzinta.GetComponent<Rigidbody2D>().position.x)))
+            if (curent.poz == final.poz)
             {
-                break;
+                reiaCalea(start, final);
+                return;
             }
 
-
-            int x = curent.Poz.x;
-            int y = curent.Poz.y;
-            for (int i = -1; i < 2; i++)
+            foreach (Nod vecin in iaVecinii(curent))
             {
-                for (int j = -1; j < 2; j++)
+                //verificare daca este traversibil sau daca vecinul se afla deja in CLOSED
+                if (grilajCurent[vecin.poz.x, vecin.poz.y] == 1 || CLOSED.Contains(vecin))
                 {
-                    //Verificare Traversibil
-                    bool traversibil = false;
-                    //verificare sa nu luam pozitia curenta ca vecin
-                    if (i != 0 || j != 0)
+                    continue;
+                }
+
+                //verificare daca calea catre vecin e mai scurta sau daca nu este in OPEN
+                int nouCostMiscareCatreVecin = curent.Gcost + iaDistanta(curent, vecin);
+                if (nouCostMiscareCatreVecin < curent.Gcost || !OPEN.Contains(vecin))
+                {
+                    //calculul costurilor
+                    vecin.Gcost = nouCostMiscareCatreVecin;
+                    vecin.Hcost = iaDistanta(vecin, final);
+                    vecin.parinte = curent;
+
+                    if (!OPEN.Contains(vecin))
                     {
-                        //verificare sa nu fie pe margine
-                        if (!(x + i < 0 || y + j < 0 || x + i > N - 1 || y + j > N - 1))
-                        {
-                            if (grilajCurent[curent.Poz.x + i, curent.Poz.y + j] == 0)
-                            {
-                                if (!(x + i == y + j || i == -j))
-                                {
-                                    traversibil = true;
-                                }
-                                else
-                                {
-
-                                }
-                            }
-                        }
-                        //daca se afla pe margine
-                        else
-                        {
-
-                        }
+                        OPEN.Add(vecin);
                     }
                 }
             }
+
         }
     }
 
-    //functie care returneaza vecinii unui NOD
-    public List<NOD> iaVecinii(Vector2Int nodul)
+    //functie de reluarea a cararii
+    public void reiaCalea(Nod startNod, Nod finalNod)
     {
-        List<NOD> vecini = new List<NOD>();
-        return vecini;
+        List<Nod> calea = new List<Nod>();
+        Nod nodCurent = finalNod;
+
+        while(nodCurent!= startNod)
+        {
+            calea.Add(nodCurent);
+            nodCurent = nodCurent.parinte;
+        }
+
+        calea.Reverse();
+
+
     }
 
-    //functie pentru calcularea costurilor pentru un NOD
-    private void Calcul(NOD a)
+    //functie calcul distanta dintre 2 puncte
+    public int iaDistanta(Nod A, Nod B)
     {
-        //distanta/cost de la nod la start
-        float g = 10 * Mathf.Sqrt(Mathf.Pow(conv_y_IN_i(Mathf.FloorToInt(rb.position.y)) - a.Poz.x, 2) + Mathf.Pow(conv_x_IN_j(Mathf.FloorToInt(rb.position.x)) - a.Poz.y, 2));
-        a.Gcost1 = (int)g;
-        //distanta/cost de la nod la tzinta
-        float h = 10 * Mathf.Sqrt(Mathf.Pow(conv_y_IN_i(Mathf.FloorToInt(tzinta.GetComponent<Rigidbody2D>().position.y)) - a.Poz.x, 2) + Mathf.Pow(conv_x_IN_j(Mathf.FloorToInt(tzinta.GetComponent<Rigidbody2D>().position.x)) - a.Poz.y, 2));
-        a.Hcost1 = (int)h;
-        //costul total
-        a.Fcost1 = a.Gcost1 + a.Hcost1;
+        int dstX = Mathf.Abs(A.poz.x - B.poz.x);
+        int dstY = Mathf.Abs(A.poz.y - B.poz.y);
+
+        if (dstX > dstY)
+            return 14 * dstY + 10 * (dstX - dstY);
+        return 14 * dstX + 10 * (dstY - dstX);
+    }
+
+    //functie care returneaza vecinii unui NOD
+    public List<Nod> iaVecinii(Nod nodul)
+    {
+        List<Nod> vecini = new List<Nod>();
+        for (int i = -1; i < 2; i++)
+        {
+            for (int j = -1; j < 2; j++)
+            {
+                if (i == 0 && j == 0)
+                    continue;
+
+                int verifI = nodul.poz.x + i;
+                int verifJ = nodul.poz.y + j;
+
+                if (verifI >= 0 && verifI < N && verifJ >= 0 && verifJ < N)
+                {
+                    vecini.Add(new Nod(new Vector2Int(verifI, verifJ)));
+                }
+            }
+        }
+
+        return vecini;
     }
 
     private void FixedUpdate()

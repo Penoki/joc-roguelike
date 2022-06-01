@@ -5,7 +5,8 @@ using UnityEngine;
 public class Nod
 {
     public Vector2Int poz;
-    int Gcost, Hcost;
+    public int Gcost, Hcost;
+    public Nod parinte;
 
     public Nod(Vector2Int _poz)
     {
