@@ -13,6 +13,7 @@ public class Gridul : MonoBehaviour
     Nod[,] grid;
 
     float diametruNod;
+    public float decalaj = 0.5f;
     int gridX, gridY;
 
     private void Start()
@@ -30,16 +31,16 @@ public class Gridul : MonoBehaviour
     public Nod coordLume_to_Nod(Vector3 pozLume)
     {
         //calcul procentaj unde s-ar afla dintre celule de pe grid, cazul nostru 34
-        float procentX = (pozLume.x + marimeGridLume.x / 2) /  marimeGridLume.x;
-        float procentY = (pozLume.y + marimeGridLume.y/2) /  marimeGridLume.y;
+        float procentX = (pozLume.x - decalaj + marimeGridLume.x / 2) / marimeGridLume.x;
+        float procentY = (pozLume.y - decalaj + marimeGridLume.y / 2) / marimeGridLume.y;
         //daca jucatorul se afla in afara gridului, nu ne va da valori eronate
         procentX = Mathf.Clamp01(procentX);
         procentY = Mathf.Clamp01(procentY);
 
-        int x = Mathf.RoundToInt((gridX - 1) *  procentX);
-        int y = Mathf.RoundToInt((gridY - 1) *  procentY);
+        int x = Mathf.RoundToInt((gridX - 1) * procentX);
+        int y = Mathf.RoundToInt((gridY - 1) * procentY);
 
-        return grid[x-2,y-2];
+        return grid[x, y];
     }
 
     void CreazaGrid()
