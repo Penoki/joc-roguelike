@@ -14,17 +14,18 @@ public class Gridul : MonoBehaviour
 
     float diametruNod;
     public float decalaj = 0.5f;
-    int gridX, gridY;
+    int marimeGridX, marimeGridY;
+
+    public List<Nod> carare;
 
     private void Start()
     {
         diametruNod = razaNod * 2;
         //cate noduri vor intra pe grid in functie de diametrul unui nod
-        gridX = Mathf.RoundToInt(marimeGridLume.x / diametruNod);
-        gridY = Mathf.RoundToInt(marimeGridLume.y / diametruNod);
+        marimeGridX = Mathf.RoundToInt(marimeGridLume.x / diametruNod);
+        marimeGridY = Mathf.RoundToInt(marimeGridLume.y / diametruNod);
 
         CreazaGrid();
-
     }
 
     //metoda pentru convertirea pozitiei din lume in pozitie de pe grid
@@ -37,8 +38,8 @@ public class Gridul : MonoBehaviour
         procentX = Mathf.Clamp01(procentX);
         procentY = Mathf.Clamp01(procentY);
 
-        int x = Mathf.RoundToInt((gridX - 1) * procentX);
-        int y = Mathf.RoundToInt((gridY - 1) * procentY);
+        int x = Mathf.RoundToInt((marimeGridX - 1) * procentX);
+        int y = Mathf.RoundToInt((marimeGridY - 1) * procentY);
 
         return grid[x, y];
     }
@@ -46,20 +47,20 @@ public class Gridul : MonoBehaviour
     void CreazaGrid()
     {
         //initializare grid
-        grid = new Nod[gridX, gridY];
+        grid = new Nod[marimeGridX, marimeGridY];
         //transform.position = centrul lumii, 
         Vector3 stangaJosLumii = transform.position - Vector3.right * marimeGridLume.x / 2 - Vector3.up * marimeGridLume.y / 2;
 
-        for (int x = 0; x < gridX; x++)
+        for (int x = 0; x < marimeGridX; x++)
         {
-            for (int y = 0; y < gridY; y++)
+            for (int y = 0; y < marimeGridY; y++)
             {
                 //calcularea fiecare pozitie a fiecarui nod din grid
                 Vector3 punctLume = stangaJosLumii + Vector3.right * (x * diametruNod + razaNod) + Vector3.up * (y * diametruNod + razaNod);
 
                 //verificarea coliziunii cu obstacolele
                 bool traversibil = !(Physics2D.OverlapCircle(punctLume, razaNod, blocadaMasca));
-                grid[x, y] = new Nod(punctLume, traversibil);
+                grid[x, y] = new Nod(traversibil, punctLume, x, y);
             }
         }
     }
@@ -81,8 +82,33 @@ public class Gridul : MonoBehaviour
                 // - 0.1f pentru un spatiu mic intre cuburi
                 Gizmos.color = (a.traversabil) ? Color.white : Color.red;
                 if (jucatorNod == a) { Gizmos.color = Color.green; }
+                if (carare!=null && carare.Contains(a)) { Gizmos.color = Color.cyan; }
                 Gizmos.DrawCube(a.poz, Vector3.one * (diametruNod - 0.1f));
             }
         }
+    }
+
+    //functie care returneaza vecinii unui NOD
+    public List<Nod> iaVecinii(Nod nodul)
+    {
+        List<Nod> vecini = new List<Nod>();
+        for (int i = -1; i < 2; i++)
+        {
+            for (int j = -1; j < 2; j++)
+            {
+                if (i == 0 && j == 0)
+                    continue;
+
+                int verifI = nodul.gridX + i;
+                int verifJ = nodul.gridY + j;
+
+                if (verifI >= 0 && verifI < marimeGridX && verifJ >= 0 && verifJ < marimeGridY)
+                {
+                    vecini.Add(grid[verifI,verifJ]);
+                }
+            }
+        }
+
+        return vecini;
     }
 }
