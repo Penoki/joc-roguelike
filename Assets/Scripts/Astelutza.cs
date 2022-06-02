@@ -7,13 +7,11 @@ public class Astelutza : MonoBehaviour
     public Transform tzinta, cautator, Astea;
     Gridul grid;
 
-    public float viteza = 400f;
-    public float distantaUrmPct = 0.1f;
-
     int pctCurent = 0;
-    bool atinsFinal = false;
-
+    public float viteza = 55f, marja = 0.01f, distanta = 0.01f;
     Rigidbody2D rb;
+
+    bool atinsFinal = false;
 
     private void Start()
     {
@@ -28,21 +26,66 @@ public class Astelutza : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (grid.carare == null)
-            return;
+        Vector2 p = tzinta.position;
+        if ((rb.position.x >= (p.x - marja) && rb.position.x <= (p.x + marja)) && (rb.position.y >= (p.y - marja) && rb.position.y <= (p.y + marja))) { atinsFinal = true; return; }
+        else { atinsFinal = false; }
 
-        
-        Vector2 directie = ((Vector2)grid.Nod_to_coordLume(grid.carare[pctCurent]) - rb.position).normalized;
-        Vector2 forta = directie * viteza * Time.deltaTime;
-
-        rb.AddForce(forta);
-
-        float distanta = Vector2.Distance(rb.position, grid.Nod_to_coordLume(grid.carare[pctCurent]));
-
-        if (distanta < distantaUrmPct)
+        if (grid.carare != null)
         {
-            pctCurent++;
+            if (grid.carare.Count != 0)
+            {
+                if (rb.position != (Vector2)tzinta.position)
+                {
+                    Vector2 wp = grid.carare[pctCurent].poz;
+                    if ((rb.position != wp))
+                    {
+                        float distantaCurenta = Vector2.Distance(rb.position, tzinta.position);
+                        if (distantaCurenta >= distanta)
+                        {
+                            rb.position = Vector2.MoveTowards(rb.position, wp, viteza * Time.deltaTime);
+                        }
+
+                        /*
+                        float x, y;
+                        if (rb.position.x <= wp.x + marja && rb.position.x >= wp.x - marja)
+                        {
+                            x = 0f;
+                        }
+                        else if (rb.position.x < wp.x)
+                        {
+                            x = 0.01f;
+                        }
+                        else
+                        {
+                            x = -0.01f;
+                        }
+
+                        if (rb.position.y <= wp.y + marja && rb.position.y >= wp.y - marja)
+                        {
+                            y = 0f;
+                        }
+                        else if (rb.position.y < wp.y)
+                        {
+                            y = 0.01f;
+                        }
+                        else
+                        {
+                            y = -0.01f;
+                        }
+
+                        rb.MovePosition(rb.position + new Vector2(x, y) * viteza * Time.fixedDeltaTime);
+                        
+                    }*/
+                        else
+                        {
+                            pctCurent++;
+                            if (pctCurent > grid.carare.Count) { pctCurent = 0; }
+                        }
+                    }
+                }
+            }
         }
+
     }
 
     //algoritm de cautare A* de la pct A la pct B

@@ -6,6 +6,8 @@ public class Gridul : MonoBehaviour
 {
     public Transform jucator;
     public LayerMask blocadaMasca;
+    public GameObject incapere;
+    public int[,] grilajCamera;
     //definirea suprafetei care gridul o va acoperi
     public Vector2 marimeGridLume;
     //definirea spatiului ocupat de fiecare nod
@@ -24,6 +26,11 @@ public class Gridul : MonoBehaviour
         //cate noduri vor intra pe grid in functie de diametrul unui nod
         marimeGridX = Mathf.RoundToInt(marimeGridLume.x / diametruNod);
         marimeGridY = Mathf.RoundToInt(marimeGridLume.y / diametruNod);
+
+        incapere = this.transform.parent.gameObject;
+        incapere.GetComponent<detaliiIncapere>().ActualizareGrilaCamera();
+        grilajCamera = incapere.GetComponent<detaliiIncapere>().grilajCamera;
+        
 
         CreazaGrid();
     }
@@ -49,8 +56,8 @@ public class Gridul : MonoBehaviour
     {
         Vector3 coordLume;
         float xprocent, yprocent;
-        xprocent = pozNod.gridX / (marimeGridX - 1);
-        yprocent = pozNod.gridY / (marimeGridY - 1);
+        xprocent = Mathf.Abs(pozNod.poz.x / (marimeGridX - 1));
+        yprocent = Mathf.Abs(pozNod.poz.y / (marimeGridY - 1));
 
         coordLume.z = 0;
         coordLume.x = xprocent * marimeGridLume.x + decalaj - marimeGridLume.x / 2;
@@ -68,14 +75,22 @@ public class Gridul : MonoBehaviour
 
         for (int x = 0; x < marimeGridX; x++)
         {
+            int x_obs = x / 5;
             for (int y = 0; y < marimeGridY; y++)
             {
+                int y_obs = y / 5;
                 //calcularea fiecare pozitie a fiecarui nod din grid
                 Vector3 punctLume = stangaJosLumii + Vector3.right * (x * diametruNod + razaNod) + Vector3.up * (y * diametruNod + razaNod);
 
                 //verificarea coliziunii cu obstacolele
-                bool traversibil = !(Physics2D.OverlapCircle(punctLume, razaNod, blocadaMasca));
-                grid[x, y] = new Nod(traversibil, punctLume, x, y);
+                //bool traversibil = !(Physics2D.OverlapCircle(punctLume, razaNod, blocadaMasca));
+                bool traversibil = false;
+                if (grilajCamera[x_obs, y_obs] == 0)
+                {
+                    traversibil = true;
+                }
+
+                    grid[x, y] = new Nod(traversibil, punctLume, x, y);
             }
         }
     }

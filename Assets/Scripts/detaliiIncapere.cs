@@ -24,5 +24,18 @@ public class detaliiIncapere : MonoBehaviour
             //convertire spatiu 2D x y in matrice i j    si marcare obstacole
             grilajCamera[N - ob.y - (N - 1) / 2 - 1, ob.x + (N - 1) / 2] = 1;
         }
+
+        //oglindire matrice fata de axa orizontala
+        /*
+        for (int x = 0; x < N / 2; x++)
+        {
+            for (int y = 0; y < N; y++)
+            {
+                int aux;
+                aux = grilajCamera[x, y];
+                grilajCamera[x, y] = grilajCamera[N - x - 1, y];
+                grilajCamera[N - x - 1, y] = aux;
+            }
+        }*/
     }
 }
