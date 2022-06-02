@@ -255,7 +255,6 @@ GameObject:
   m_Component:
   - component: {fileID: 114230096}
   - component: {fileID: 114230097}
-  - component: {fileID: 114230098}
   m_Layer: 0
   m_Name: A*
   m_TagString: Untagged
@@ -296,20 +295,6 @@ MonoBehaviour:
   marimeGridLume: {x: 7, y: 7}
   razaNod: 0.1
   decalaj: 0.5
---- !u!114 &114230098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 114230095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad73a4aa602e8dd4aabdb302ec366c5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tzinta: {fileID: 200438071}
-  cautator: {fileID: 535564547}
 --- !u!1 &135551067
 GameObject:
   m_ObjectHideFlags: 0
@@ -2340,7 +2325,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 2
-  m_LinearDrag: 0
+  m_LinearDrag: 1.5
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -2374,8 +2359,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad73a4aa602e8dd4aabdb302ec366c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tzinta: {fileID: 0}
-  cautator: {fileID: 0}
+  tzinta: {fileID: 200438071}
+  cautator: {fileID: 535564547}
+  Astea: {fileID: 114230096}
+  viteza: 200
+  distantaUrmPct: 3
 --- !u!1 &597579507
 GameObject:
   m_ObjectHideFlags: 0

@@ -44,6 +44,21 @@ public class Gridul : MonoBehaviour
         return grid[x, y];
     }
 
+    //metoda pentru convertirea pozitiei de pe grid in pozitie din lume
+    public Vector3 Nod_to_coordLume(Nod pozNod)
+    {
+        Vector3 coordLume;
+        float xprocent, yprocent;
+        xprocent = pozNod.gridX / (marimeGridX - 1);
+        yprocent = pozNod.gridY / (marimeGridY - 1);
+
+        coordLume.z = 0;
+        coordLume.x = xprocent * marimeGridLume.x + decalaj - marimeGridLume.x / 2;
+        coordLume.y = yprocent * marimeGridLume.y + decalaj - marimeGridLume.y / 2;
+
+        return coordLume;
+    }
+
     void CreazaGrid()
     {
         //initializare grid
@@ -82,7 +97,7 @@ public class Gridul : MonoBehaviour
                 // - 0.1f pentru un spatiu mic intre cuburi
                 Gizmos.color = (a.traversabil) ? Color.white : Color.red;
                 if (jucatorNod == a) { Gizmos.color = Color.green; }
-                if (carare!=null && carare.Contains(a)) { Gizmos.color = Color.cyan; }
+                if (carare != null && carare.Contains(a)) { Gizmos.color = Color.cyan; }
                 Gizmos.DrawCube(a.poz, Vector3.one * (diametruNod - 0.1f));
             }
         }
@@ -104,7 +119,7 @@ public class Gridul : MonoBehaviour
 
                 if (verifI >= 0 && verifI < marimeGridX && verifJ >= 0 && verifJ < marimeGridY)
                 {
-                    vecini.Add(grid[verifI,verifJ]);
+                    vecini.Add(grid[verifI, verifJ]);
                 }
             }
         }
