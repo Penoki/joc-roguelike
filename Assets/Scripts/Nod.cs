@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Nod
 {
-    public Vector2Int poz;
+    public bool traversabil;
+    public Vector3 poz;
     public int Gcost, Hcost;
     public Nod parinte;
 
-    public Nod(Vector2Int _poz)
+    public Nod(Vector3 _poz, bool _traversibil)
     {
         poz = _poz;
+        traversabil = _traversibil;
     }
 
     public int Fcost
