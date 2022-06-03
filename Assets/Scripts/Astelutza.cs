@@ -7,15 +7,18 @@ public class Astelutza : MonoBehaviour
     public Transform tzinta, cautator, Astea;
     Gridul grid;
 
-    int pctCurent = 0;
+    int pctCurent = 1;
     public float viteza = 55f, marja = 0.01f, distanta = 0.01f;
     Rigidbody2D rb;
 
 
     private void Start()
     {
+        Astea = this.transform.parent.Find("A*grid").transform;
         grid = Astea.GetComponent<Gridul>();
         rb = GetComponent<Rigidbody2D>();
+        tzinta = GameObject.FindWithTag("Player").transform;
+        cautator = this.transform;
     }
 
     void Update()
@@ -35,7 +38,7 @@ public class Astelutza : MonoBehaviour
                 if (rb.position != (Vector2)tzinta.position)
                 {
                     Vector2 wp = grid.carare[pctCurent].poz;
-                    Debug.Log("Pozitie tzinta: " + wp);
+                    //Debug.Log("Pozitie tzinta: " + wp);
                     if ((rb.position != wp))
                     {
                         float distantaCurenta = Vector2.Distance(rb.position, tzinta.position);
@@ -46,8 +49,13 @@ public class Astelutza : MonoBehaviour
                         else
                         {
                             pctCurent++;
-                            if (pctCurent > grid.carare.Count) { pctCurent = 0; }
+                            if (pctCurent > grid.carare.Count) { pctCurent = 1; }
                         }
+                    }
+                    else
+                    {
+                        pctCurent++;
+                        if (pctCurent > grid.carare.Count) { pctCurent = 1; }
                     }
                 }
             }

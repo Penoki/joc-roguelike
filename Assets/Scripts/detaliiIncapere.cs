@@ -5,6 +5,7 @@ using UnityEngine;
 public class detaliiIncapere : MonoBehaviour
 {
     public List<Vector2Int> obstacoleCurente, puncteMaterializare;
+    public char tipIncapere;
     //obstacole = 1, teren liber = 0
     //initializare cu 0
     public int[,] grilajCamera = new int[,] { { 0, 0, 0, 0, 0, 0, 0},
@@ -14,8 +15,16 @@ public class detaliiIncapere : MonoBehaviour
                                               { 0, 0, 0, 0, 0, 0, 0 },
                                               { 0, 0, 0, 0, 0, 0, 0 },
                                               { 0, 0, 0, 0, 0, 0, 0 } };
-    public const int N = 7;
+    public int N;
 
+    private void Start()
+    {
+        if (puncteMaterializare != null && tipIncapere == 'N')
+        {
+            this.gameObject.AddComponent<MaterializareInamiciCN>();
+            this.GetComponent<MaterializareInamiciCN>().puncteMaterializare = puncteMaterializare;
+        }
+    }
 
     public void ActualizareGrilaCamera()
     {
@@ -23,7 +32,7 @@ public class detaliiIncapere : MonoBehaviour
         {
             //convertire spatiu 2D x y in matrice i j    si marcare obstacole
             //grilajCamera[N - ob.y - (N - 1) / 2 - 1, ob.x + (N - 1) / 2] = 1;
-            grilajCamera[ob.x+ (N - 1) / 2, ob.y+ (N - 1) / 2] = 1;
+            grilajCamera[ob.x + (N - 1) / 2, ob.y + (N - 1) / 2] = 1;
         }
 
         //oglindire matrice fata de axa orizontala

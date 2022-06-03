@@ -10,6 +10,12 @@ public class Manechin : MonoBehaviour
     private int msecundaRanit, secundaRanit;
     public GameObject jucator;
     public bool ranit = false, atingere = false;
+
+    private void Start()
+    {
+        jucator = GameObject.FindWithTag("Player");
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.tag == "ostil")

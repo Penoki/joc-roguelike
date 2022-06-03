@@ -494,7 +494,10 @@ public class GeneratorIncaperi : MonoBehaviour
                 break;
         }
 
+        camera.GetComponent<detaliiIncapere>().N = camereN + 1;
         camera.GetComponent<detaliiIncapere>().ActualizareGrilaCamera();
+        camera.GetComponent<detaliiIncapere>().tipIncapere = tipCamera;
+
         return camera;
     }
 

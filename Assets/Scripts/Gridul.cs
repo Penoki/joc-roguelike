@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gridul : MonoBehaviour
 {
-    public Transform jucator;
+    //public Transform jucator;
     public LayerMask blocadaMasca;
     public GameObject incapere;
     public int[,] grilajCamera;
@@ -12,6 +12,7 @@ public class Gridul : MonoBehaviour
     public Vector2 marimeGridLume;
     //definirea spatiului ocupat de fiecare nod
     public float razaNod;
+    public Transform cameraParinte;
     Nod[,] grid;
 
     float diametruNod;
@@ -22,14 +23,14 @@ public class Gridul : MonoBehaviour
 
     private void Start()
     {
+        cameraParinte = this.transform.parent;
+
         diametruNod = razaNod * 2;
         //cate noduri vor intra pe grid in functie de diametrul unui nod
         marimeGridX = Mathf.RoundToInt(marimeGridLume.x / diametruNod);
         marimeGridY = Mathf.RoundToInt(marimeGridLume.y / diametruNod);
 
-        incapere.GetComponent<detaliiIncapere>().ActualizareGrilaCamera();
         grilajCamera = incapere.GetComponent<detaliiIncapere>().grilajCamera;
-
 
         CreazaGrid();
     }
@@ -37,6 +38,8 @@ public class Gridul : MonoBehaviour
     //metoda pentru convertirea pozitiei din lume in pozitie de pe grid
     public Nod coordLume_to_Nod(Vector3 pozLume)
     {
+        //substragere decalaj camera
+        pozLume = pozLume - cameraParinte.position;
         //calcul procentaj unde s-ar afla dintre celule de pe grid, cazul nostru 34
         float procentX = (pozLume.x - decalaj + marimeGridLume.x / 2) / marimeGridLume.x;
         float procentY = (pozLume.y - decalaj + marimeGridLume.y / 2) / marimeGridLume.y;
@@ -103,14 +106,14 @@ public class Gridul : MonoBehaviour
         //verificarea gridului cu Gizmos
         if (grid != null)
         {
-            Nod jucatorNod = coordLume_to_Nod(jucator.position);
+            //Nod jucatorNod = coordLume_to_Nod(jucator.position);
             foreach (Nod a in grid)
             {
 
                 //pentru fiecare nod din grid, vom desena un cub
                 // - 0.1f pentru un spatiu mic intre cuburi
                 Gizmos.color = (a.traversabil) ? Color.white : Color.red;
-                if (jucatorNod == a) { Gizmos.color = Color.green; }
+                //if (jucatorNod == a) { Gizmos.color = Color.green; }
                 if (carare != null && carare.Contains(a)) { Gizmos.color = Color.cyan; }
                 Gizmos.DrawCube(a.poz, Vector3.one * (diametruNod - 0.1f));
             }
