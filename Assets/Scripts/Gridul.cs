@@ -12,7 +12,8 @@ public class Gridul : MonoBehaviour
     public Vector2 marimeGridLume;
     //definirea spatiului ocupat de fiecare nod
     public float razaNod;
-    public Transform cameraParinte;
+    //cameraParinte este folosit pentru pozitia incaperii
+    private Vector3 decalajCameraParinte;
     Nod[,] grid;
 
     float diametruNod;
@@ -23,7 +24,8 @@ public class Gridul : MonoBehaviour
 
     private void Start()
     {
-        cameraParinte = this.transform.parent;
+        incapere = this.transform.parent.gameObject;
+        decalajCameraParinte = incapere.transform.position;
 
         diametruNod = razaNod * 2;
         //cate noduri vor intra pe grid in functie de diametrul unui nod
@@ -39,7 +41,7 @@ public class Gridul : MonoBehaviour
     public Nod coordLume_to_Nod(Vector3 pozLume)
     {
         //substragere decalaj camera
-        pozLume = pozLume - cameraParinte.position;
+        pozLume = pozLume - decalajCameraParinte;
         //calcul procentaj unde s-ar afla dintre celule de pe grid, cazul nostru 34
         float procentX = (pozLume.x - decalaj + marimeGridLume.x / 2) / marimeGridLume.x;
         float procentY = (pozLume.y - decalaj + marimeGridLume.y / 2) / marimeGridLume.y;

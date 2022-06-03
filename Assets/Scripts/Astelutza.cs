@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Astelutza : MonoBehaviour
 {
-    public Transform tzinta, cautator, Astea;
+    public GameObject AsteaMatritza, Astea;
+    public GameObject tzinta, cautator;
     Gridul grid;
 
     int pctCurent = 1;
@@ -14,34 +15,41 @@ public class Astelutza : MonoBehaviour
 
     private void Start()
     {
-        Astea = this.transform.parent.Find("A*grid").transform;
+        //instantiere A*grid pentru acest inamic
+        AsteaMatritza = Resources.Load("Prefabs/A_grid") as GameObject;
+        Astea = Instantiate(AsteaMatritza, this.transform.parent.transform);
+
+        //Astea = this.transform.parent.Find("A*grid").transform;
         grid = Astea.GetComponent<Gridul>();
         rb = GetComponent<Rigidbody2D>();
-        tzinta = GameObject.FindWithTag("Player").transform;
-        cautator = this.transform;
+        tzinta = GameObject.FindWithTag("Player");
+        cautator = this.gameObject;
     }
 
     void Update()
     {
-        GasesteCalea(cautator.position, tzinta.position);
+        if(cautator!=null && tzinta!=null && grid!=null && Astea!=null) //NU AJUTA REEEEEEEEEEEEEEE
+        {
+            GasesteCalea(cautator.transform.position, tzinta.transform.position);
+        }
     }
 
     private void FixedUpdate()
     {
-        Vector2 p = tzinta.position;
+        Vector2 p = tzinta.transform.position;
         if ((rb.position.x >= (p.x - marja) && rb.position.x <= (p.x + marja)) && (rb.position.y >= (p.y - marja) && rb.position.y <= (p.y + marja))) { return; }
 
         if (grid.carare != null)
         {
             if (grid.carare.Count != 0)
             {
-                if (rb.position != (Vector2)tzinta.position)
+                if (rb.position != (Vector2)tzinta.transform.position)
                 {
                     Vector2 wp = grid.carare[pctCurent].poz;
                     //Debug.Log("Pozitie tzinta: " + wp);
                     if ((rb.position != wp))
                     {
-                        float distantaCurenta = Vector2.Distance(rb.position, tzinta.position);
+                        float distantaCurenta = Vector2.Distance(rb.position, tzinta.transform.position);
                         if (distantaCurenta >= distanta)
                         {
                             rb.position = Vector2.MoveTowards(rb.position, wp, viteza * Time.deltaTime);

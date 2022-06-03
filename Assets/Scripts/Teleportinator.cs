@@ -18,7 +18,10 @@ public class Teleportinator : MonoBehaviour
         if (collision.transform.tag == "Player" && deschisa)
         {
             collision.transform.position = destinatie.position;
-            cameraDestinatie.GetComponent<MaterializareInamiciCN>().inamiciMaterializare();
+            if( cameraDestinatie.GetComponent<detaliiIncapere>().tipIncapere == 'N')
+            {
+                cameraDestinatie.GetComponent<MaterializareInamiciCN>().inamiciMaterializare();
+            }
             //destinatie.GetComponentInParent<Teleportinator>().deschisa = true;
         }
     }
