@@ -8,10 +8,9 @@ public class Astelutza : MonoBehaviour
     Gridul grid;
 
     int pctCurent = 0;
-    public float viteza = 55f, marja = 0f, distanta = 0.01f;
+    public float viteza = 55f, marja = 0.01f, distanta = 0.01f;
     Rigidbody2D rb;
 
-    bool atinsFinal = false;
 
     private void Start()
     {
@@ -27,8 +26,7 @@ public class Astelutza : MonoBehaviour
     private void FixedUpdate()
     {
         Vector2 p = tzinta.position;
-        if ((rb.position.x >= (p.x - marja) && rb.position.x <= (p.x + marja)) && (rb.position.y >= (p.y - marja) && rb.position.y <= (p.y + marja))) { atinsFinal = true; return; }
-        else { atinsFinal = false; }
+        if ((rb.position.x >= (p.x - marja) && rb.position.x <= (p.x + marja)) && (rb.position.y >= (p.y - marja) && rb.position.y <= (p.y + marja))) { return; }
 
         if (grid.carare != null)
         {
@@ -37,7 +35,7 @@ public class Astelutza : MonoBehaviour
                 if (rb.position != (Vector2)tzinta.position)
                 {
                     Vector2 wp = grid.carare[pctCurent].poz;
-                    Debug.Log("Pozitie curenta: " + wp);
+                    Debug.Log("Pozitie tzinta: " + wp);
                     if ((rb.position != wp))
                     {
                         float distantaCurenta = Vector2.Distance(rb.position, tzinta.position);
