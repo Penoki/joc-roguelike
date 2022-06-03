@@ -27,7 +27,6 @@ public class Gridul : MonoBehaviour
         marimeGridX = Mathf.RoundToInt(marimeGridLume.x / diametruNod);
         marimeGridY = Mathf.RoundToInt(marimeGridLume.y / diametruNod);
 
-        incapere = this.transform.parent.gameObject;
         incapere.GetComponent<detaliiIncapere>().ActualizareGrilaCamera();
         grilajCamera = incapere.GetComponent<detaliiIncapere>().grilajCamera;
         
@@ -91,6 +90,20 @@ public class Gridul : MonoBehaviour
                 }
 
                     grid[x, y] = new Nod(traversibil, punctLume, x, y);
+            }
+        }
+        for (int x = 1; x < marimeGridX; x++)
+        {
+            for (int y = 1; y < marimeGridY; y++)
+            {
+                if (grid[x, y].traversabil == true && grid[x - 1, y].traversabil == false && grid[x, y - 1].traversabil == false && grid[x - 1, y - 1].traversabil == true)
+                {
+                    grid[x, y].traversabil = false;
+                }
+                if (grid[x, y].traversabil == true && grid[x - 1, y].traversabil == false && grid[x, y + 1].traversabil == false && grid[x - 1, y + 1].traversabil == true)
+                {
+                    grid[x, y].traversabil = false;
+                }
             }
         }
     }

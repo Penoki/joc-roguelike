@@ -8,7 +8,7 @@ public class Astelutza : MonoBehaviour
     Gridul grid;
 
     int pctCurent = 0;
-    public float viteza = 55f, marja = 0.01f, distanta = 0.01f;
+    public float viteza = 55f, marja = 0f, distanta = 0.01f;
     Rigidbody2D rb;
 
     bool atinsFinal = false;
@@ -37,6 +37,7 @@ public class Astelutza : MonoBehaviour
                 if (rb.position != (Vector2)tzinta.position)
                 {
                     Vector2 wp = grid.carare[pctCurent].poz;
+                    Debug.Log("Pozitie curenta: " + wp);
                     if ((rb.position != wp))
                     {
                         float distantaCurenta = Vector2.Distance(rb.position, tzinta.position);
@@ -44,38 +45,6 @@ public class Astelutza : MonoBehaviour
                         {
                             rb.position = Vector2.MoveTowards(rb.position, wp, viteza * Time.deltaTime);
                         }
-
-                        /*
-                        float x, y;
-                        if (rb.position.x <= wp.x + marja && rb.position.x >= wp.x - marja)
-                        {
-                            x = 0f;
-                        }
-                        else if (rb.position.x < wp.x)
-                        {
-                            x = 0.01f;
-                        }
-                        else
-                        {
-                            x = -0.01f;
-                        }
-
-                        if (rb.position.y <= wp.y + marja && rb.position.y >= wp.y - marja)
-                        {
-                            y = 0f;
-                        }
-                        else if (rb.position.y < wp.y)
-                        {
-                            y = 0.01f;
-                        }
-                        else
-                        {
-                            y = -0.01f;
-                        }
-
-                        rb.MovePosition(rb.position + new Vector2(x, y) * viteza * Time.fixedDeltaTime);
-                        
-                    }*/
                         else
                         {
                             pctCurent++;

@@ -22,7 +22,8 @@ public class detaliiIncapere : MonoBehaviour
         foreach (Vector2Int ob in obstacoleCurente)
         {
             //convertire spatiu 2D x y in matrice i j    si marcare obstacole
-            grilajCamera[N - ob.y - (N - 1) / 2 - 1, ob.x + (N - 1) / 2] = 1;
+            //grilajCamera[N - ob.y - (N - 1) / 2 - 1, ob.x + (N - 1) / 2] = 1;
+            grilajCamera[ob.x+ (N - 1) / 2, ob.y+ (N - 1) / 2] = 1;
         }
 
         //oglindire matrice fata de axa orizontala

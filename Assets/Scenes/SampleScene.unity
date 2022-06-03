@@ -273,8 +273,8 @@ Transform:
   m_LocalPosition: {x: 0.5, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1125093155}
-  m_RootOrder: 14
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114230097
 MonoBehaviour:
@@ -292,7 +292,7 @@ MonoBehaviour:
   blocadaMasca:
     serializedVersion: 2
     m_Bits: 8
-  incapere: {fileID: 0}
+  incapere: {fileID: 1734178751}
   marimeGridLume: {x: 7, y: 7}
   razaNod: 0.1
   decalaj: 0.5
@@ -1149,7 +1149,7 @@ Transform:
   - {fileID: 861836207}
   - {fileID: 1348186684}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &200438072
 MonoBehaviour:
@@ -1536,7 +1536,7 @@ RectTransform:
   - {fileID: 1241699190}
   - {fileID: 1860872869}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2242,7 +2242,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.03}
-  m_Size: {x: 0.2, y: 0.07}
+  m_Size: {x: 0.2, y: 0.2}
   m_Direction: 1
 --- !u!114 &535564544
 MonoBehaviour:
@@ -2346,7 +2346,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &535564548
 MonoBehaviour:
@@ -2364,7 +2364,7 @@ MonoBehaviour:
   cautator: {fileID: 535564547}
   Astea: {fileID: 114230096}
   viteza: 1.2
-  marja: 0.01
+  marja: 0
   distanta: 0.1
 --- !u!1 &597579507
 GameObject:
@@ -3263,7 +3263,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8341474655873215196, guid: 0d2bb23c6dd91194aaccd9004de4708b, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8341474655873215196, guid: 0d2bb23c6dd91194aaccd9004de4708b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3309,6 +3309,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grid
       objectReference: {fileID: 0}
+    - target: {fileID: 8341474655873215198, guid: 0d2bb23c6dd91194aaccd9004de4708b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d2bb23c6dd91194aaccd9004de4708b, type: 3}
 --- !u!1 &1125093152
@@ -3328,7 +3332,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1125093153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3394,9 +3398,8 @@ Transform:
   - {fileID: 2065021280}
   - {fileID: 1394352342}
   - {fileID: 1230797370}
-  - {fileID: 114230096}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1127134342
 GameObject:
@@ -4781,7 +4784,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1536037815
 MonoBehaviour:
@@ -4815,7 +4818,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.03}
-  m_Size: {x: 0.2, y: 0.07}
+  m_Size: {x: 0.2, y: 0.2}
   m_Direction: 1
 --- !u!1 &1634201957
 GameObject:
@@ -4881,7 +4884,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1700218014
 GameObject:
@@ -5015,7 +5018,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1734178752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5076,7 +5079,7 @@ Transform:
   - {fileID: 1700218015}
   - {fileID: 290986510}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1746172232
 GameObject:
@@ -5517,10 +5520,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fdd552e51e8504bad3912a25616b06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camereN: 3
+  camereN: 40
   arataTablaJoc: {fileID: 1241699191}
   sambure: 662
-  introduManualSamanta: 1
+  introduManualSamanta: 0
   podeaM:
   - {fileID: 11400000, guid: 5c01865107f4b0c408828fbfedf0a892, type: 2}
   - {fileID: 11400000, guid: 2cd480ce49afab841a510c549e9a6898, type: 2}
