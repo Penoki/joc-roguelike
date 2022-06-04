@@ -8,7 +8,7 @@ public class Astelutza : MonoBehaviour
     public GameObject tzinta, cautator;
     Gridul grid;
 
-    int pctCurent = 1;
+    int pctCurent = 0;
     public float viteza = 55f, marja = 0.01f, distanta = 0.01f;
     Rigidbody2D rb;
 
@@ -57,13 +57,13 @@ public class Astelutza : MonoBehaviour
                         else
                         {
                             pctCurent++;
-                            if (pctCurent > grid.carare.Count) { pctCurent = 1; }
+                            if (pctCurent > grid.carare.Count) { pctCurent = 0; }
                         }
                     }
                     else
                     {
                         pctCurent++;
-                        if (pctCurent > grid.carare.Count) { pctCurent = 1; }
+                        if (pctCurent > grid.carare.Count) { pctCurent = 0; }
                     }
                 }
             }

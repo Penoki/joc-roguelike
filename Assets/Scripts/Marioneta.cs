@@ -59,10 +59,15 @@ public class Marioneta : MonoBehaviour
         }
         if (sanatate <= 0)
         {
-            Destroy(this.gameObject);
-            GameObject Astea = this.GetComponent<Astelutza>().Astea;
-            Destroy(Astea);
+            Distruge();
         }
+    }
+
+    public void Distruge()
+    {
+        Destroy(this.gameObject);
+        GameObject Astea = this.GetComponent<Astelutza>().Astea;
+        Destroy(Astea);
     }
 
     private void Update()

@@ -5,7 +5,10 @@ using UnityEngine;
 public class detaliiIncapere : MonoBehaviour
 {
     public List<Vector2Int> obstacoleCurente, puncteMaterializare;
+    public List<GameObject> usi;
     public char tipIncapere;
+    public int N; //dimensiunea incaperii
+    
     //obstacole = 1, teren liber = 0
     //initializare cu 0
     public int[,] grilajCamera = new int[,] { { 0, 0, 0, 0, 0, 0, 0},
@@ -15,7 +18,7 @@ public class detaliiIncapere : MonoBehaviour
                                               { 0, 0, 0, 0, 0, 0, 0 },
                                               { 0, 0, 0, 0, 0, 0, 0 },
                                               { 0, 0, 0, 0, 0, 0, 0 } };
-    public int N;
+
 
     private void Start()
     {
@@ -30,22 +33,19 @@ public class detaliiIncapere : MonoBehaviour
     {
         foreach (Vector2Int ob in obstacoleCurente)
         {
-            //convertire spatiu 2D x y in matrice i j    si marcare obstacole
-            //grilajCamera[N - ob.y - (N - 1) / 2 - 1, ob.x + (N - 1) / 2] = 1;
+            //think about it
             grilajCamera[ob.x + (N - 1) / 2, ob.y + (N - 1) / 2] = 1;
         }
-
-        //oglindire matrice fata de axa orizontala
-        /*
-        for (int x = 0; x < N / 2; x++)
-        {
-            for (int y = 0; y < N; y++)
-            {
-                int aux;
-                aux = grilajCamera[x, y];
-                grilajCamera[x, y] = grilajCamera[N - x - 1, y];
-                grilajCamera[N - x - 1, y] = aux;
-            }
-        }*/
     }
+
+    //functie pentru inchiderea tuturor ushilor din incapere
+    public void LockDown()
+    {
+        foreach(GameObject usa in usi)
+        {
+            usa.GetComponent<Collider2D>().enabled = false;
+            usa.GetComponent<SpriteRenderer>().sprite = usa.GetComponent<Teleportinator>().inchisa;
+        }
+    }
+
 }

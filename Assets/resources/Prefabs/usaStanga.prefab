@@ -113,8 +113,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b31c80a2542cb840a1ec169057943b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deschisa: 1
   destinatie: {fileID: 0}
+  deschisa: {fileID: -8013486215173415093, guid: cabdb331282b11a40a00746ea3a97440, type: 3}
+  inchisa: {fileID: -8173764028528009216, guid: cabdb331282b11a40a00746ea3a97440, type: 3}
+  cameraDestinatie: {fileID: 0}
+  cameraCurenta: {fileID: 0}
 --- !u!1 &7699370500616428106
 GameObject:
   m_ObjectHideFlags: 0
