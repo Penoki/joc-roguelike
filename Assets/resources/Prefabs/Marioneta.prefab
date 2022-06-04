@@ -157,6 +157,7 @@ MonoBehaviour:
   sr: {fileID: 7432000463257526852}
   sanatate: 10
   ranireRacireSec: 1
+  timpPauza: 1.5
   jucator: {fileID: 0}
   cameraCurenta: {fileID: 0}
   ranit: 0

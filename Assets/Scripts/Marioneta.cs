@@ -7,6 +7,7 @@ public class Marioneta : MonoBehaviour
     public SpriteRenderer sr;
     public double sanatate = 10;
     public double ranireRacireSec = 1.4;
+    public float timpPauza=1.5f;
     private int msecundaRanit, secundaRanit;
     public GameObject jucator, cameraCurenta;
     public bool ranit = false, atingere = false;
@@ -103,7 +104,17 @@ public class Marioneta : MonoBehaviour
 
         if (atingere)
         {
+            //pauza dupa fiecare atac
+            this.GetComponent<Astelutza>().enabled = false;
+            Invoke("GataPauza", timpPauza);
+
             jucator.GetComponent<Jucator>().primitDauna();
         }
     }
+
+    public void GataPauza()
+    {
+        this.GetComponent<Astelutza>().enabled = true;
+    }
+
 }

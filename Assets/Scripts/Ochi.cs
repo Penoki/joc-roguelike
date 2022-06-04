@@ -30,12 +30,12 @@ public class Ochi : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!patrunzator && (collision.transform.tag == "pereti" || collision.transform.tag == "inamic" || collision.transform.tag == "obstacol"))
+        if (!patrunzator && (collision.transform.tag == "pereti" || collision.transform.tag == "inamic" || collision.transform.tag == "obstacol"))
         {
             Destroy(this.gameObject);
         }
     }
-
+    
     //FixedUpdate este mai de incredere pentru fizici
     //este apelata 50 de ori pe secunda
     void FixedUpdate()
