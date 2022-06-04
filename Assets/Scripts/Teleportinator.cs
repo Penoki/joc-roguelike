@@ -24,14 +24,18 @@ public class Teleportinator : MonoBehaviour
             coliziuneJ = collision;
             //teleportare jucator
             coliziuneJ.transform.position = destinatie.position;
+            //nu lasam jucatorul sa se miste un timp de 10 milisecunde
+            coliziuneJ.GetComponent<Jucator>().enabled = false;
+            //apelare functie dupa 100 milisecunde
+            Invoke("taxaDeDrumAchitata", 0.1f);
 
             if (cameraDestinatie.GetComponent<detaliiIncapere>().tipIncapere == 'N' && !cameraDestinatie.GetComponent<detaliiIncapere>().completata)
             {
                 //inchiderea ushilor
                 cameraDestinatie.GetComponent<detaliiIncapere>().LockDown();
 
-                //apelare functie dupa 10 milisecunde
-                Invoke("MaterializareInamici", 0.01f);
+                //apelare functie dupa 100 milisecunde
+                Invoke("MaterializareInamici", 0.1f);
             }
         }
     }
@@ -42,6 +46,11 @@ public class Teleportinator : MonoBehaviour
         cameraCurenta.GetComponent<detaliiIncapere>().usi.Add(this.gameObject);
     }
 
+    //permitere jucator sa se miste
+    public void taxaDeDrumAchitata()
+    {
+        coliziuneJ.GetComponent<Jucator>().enabled = true;
+    }
 
     public void MaterializareInamici()
     {

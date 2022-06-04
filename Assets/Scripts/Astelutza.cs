@@ -28,10 +28,7 @@ public class Astelutza : MonoBehaviour
 
     void Update()
     {
-        if(cautator!=null && tzinta!=null && grid!=null && Astea!=null) //NU AJUTA REEEEEEEEEEEEEEE
-        {
-            GasesteCalea(cautator.transform.position, tzinta.transform.position);
-        }
+        GasesteCalea(cautator.transform.position, tzinta.transform.position);
     }
 
     private void FixedUpdate()
@@ -43,7 +40,7 @@ public class Astelutza : MonoBehaviour
         {
             if (grid.carare.Count != 0)
             {
-                if (rb.position != (Vector2)tzinta.transform.position)
+                if (rb.position != (Vector2)tzinta.transform.position && pctCurent < grid.carare.Count && pctCurent >= 0)
                 {
                     Vector2 wp = grid.carare[pctCurent].poz;
                     //Debug.Log("Pozitie tzinta: " + wp);
