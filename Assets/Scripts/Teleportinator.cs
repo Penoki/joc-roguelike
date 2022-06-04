@@ -22,11 +22,10 @@ public class Teleportinator : MonoBehaviour
         if (collision.transform.tag == "Player")
         {
             coliziuneJ = collision;
+            //teleportare jucator
+            coliziuneJ.transform.position = destinatie.position;
 
-            //delay teleportare jucator
-            Invoke("TpJucator", 0.1f);
-
-            if (cameraDestinatie.GetComponent<detaliiIncapere>().tipIncapere == 'N')
+            if (cameraDestinatie.GetComponent<detaliiIncapere>().tipIncapere == 'N' && !cameraDestinatie.GetComponent<detaliiIncapere>().completata)
             {
                 //inchiderea ushilor
                 cameraDestinatie.GetComponent<detaliiIncapere>().LockDown();
@@ -41,12 +40,6 @@ public class Teleportinator : MonoBehaviour
     public void pontareaUshii()
     {
         cameraCurenta.GetComponent<detaliiIncapere>().usi.Add(this.gameObject);
-    }
-
-    //teleportare jucator
-    public void TpJucator()
-    {
-        coliziuneJ.transform.position = destinatie.position;
     }
 
 

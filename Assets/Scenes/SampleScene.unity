@@ -1137,8 +1137,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.01}
-  m_Size: {x: 0.3, y: 0.3}
+  m_Offset: {x: 0, y: 0.02}
+  m_Size: {x: 0.3, y: 0.2}
   m_Direction: 1
 --- !u!95 &200438074
 Animator:
@@ -1205,9 +1205,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b31c80a2542cb840a1ec169057943b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deschisa: 1
   destinatie: {fileID: 0}
+  deschisa: {fileID: 0}
+  inchisa: {fileID: 0}
   cameraDestinatie: {fileID: 0}
+  cameraCurenta: {fileID: 0}
 --- !u!70 &290986512
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -3096,6 +3098,8 @@ MonoBehaviour:
   - {x: 3, y: -1}
   - {x: 3, y: -2}
   puncteMaterializare: []
+  usi: []
+  inamici: []
   tipIncapere: 0
   N: 0
 --- !u!156049354 &1125093154
@@ -3912,9 +3916,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b31c80a2542cb840a1ec169057943b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deschisa: 1
   destinatie: {fileID: 0}
+  deschisa: {fileID: 0}
+  inchisa: {fileID: 0}
   cameraDestinatie: {fileID: 0}
+  cameraCurenta: {fileID: 0}
 --- !u!70 &1230797372
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -4197,9 +4203,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b31c80a2542cb840a1ec169057943b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deschisa: 1
   destinatie: {fileID: 0}
+  deschisa: {fileID: 0}
+  inchisa: {fileID: 0}
   cameraDestinatie: {fileID: 0}
+  cameraCurenta: {fileID: 0}
 --- !u!70 &1394352344
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -4671,9 +4679,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b31c80a2542cb840a1ec169057943b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deschisa: 1
   destinatie: {fileID: 0}
+  deschisa: {fileID: 0}
+  inchisa: {fileID: 0}
   cameraDestinatie: {fileID: 0}
+  cameraCurenta: {fileID: 0}
 --- !u!70 &1700218017
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -4784,6 +4794,8 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: -1}
   - {x: 1, y: 0}
+  usi: []
+  inamici: []
   tipIncapere: 0
   N: 0
 --- !u!156049354 &1734178753
@@ -6249,9 +6261,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b31c80a2542cb840a1ec169057943b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deschisa: 1
   destinatie: {fileID: 0}
+  deschisa: {fileID: 0}
+  inchisa: {fileID: 0}
   cameraDestinatie: {fileID: 0}
+  cameraCurenta: {fileID: 0}
 --- !u!70 &1983136670
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

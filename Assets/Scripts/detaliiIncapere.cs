@@ -5,10 +5,11 @@ using UnityEngine;
 public class detaliiIncapere : MonoBehaviour
 {
     public List<Vector2Int> obstacoleCurente, puncteMaterializare;
-    public List<GameObject> usi;
+    public List<GameObject> usi, inamici;
     public char tipIncapere;
     public int N; //dimensiunea incaperii
-    
+    public bool completata = false;
+
     //obstacole = 1, teren liber = 0
     //initializare cu 0
     public int[,] grilajCamera = new int[,] { { 0, 0, 0, 0, 0, 0, 0},
@@ -41,10 +42,20 @@ public class detaliiIncapere : MonoBehaviour
     //functie pentru inchiderea tuturor ushilor din incapere
     public void LockDown()
     {
-        foreach(GameObject usa in usi)
+        foreach (GameObject usa in usi)
         {
             usa.GetComponent<Collider2D>().enabled = false;
             usa.GetComponent<SpriteRenderer>().sprite = usa.GetComponent<Teleportinator>().inchisa;
+        }
+    }
+
+    //functie pentru deschiderea tuturor ushilor din incapere
+    public void OpenUp()
+    {
+        foreach (GameObject usa in usi)
+        {
+            usa.GetComponent<Collider2D>().enabled = true;
+            usa.GetComponent<SpriteRenderer>().sprite = usa.GetComponent<Teleportinator>().deschisa;
         }
     }
 

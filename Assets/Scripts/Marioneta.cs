@@ -8,12 +8,14 @@ public class Marioneta : MonoBehaviour
     public double sanatate = 10;
     public double ranireRacireSec = 1.4;
     private int msecundaRanit, secundaRanit;
-    public GameObject jucator;
+    public GameObject jucator, cameraCurenta;
     public bool ranit = false, atingere = false;
 
     private void Start()
     {
         jucator = GameObject.FindWithTag("Player");
+        cameraCurenta = this.transform.parent.gameObject;
+        pontareaInamicului();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -65,9 +67,27 @@ public class Marioneta : MonoBehaviour
 
     public void Distruge()
     {
-        Destroy(this.gameObject);
         GameObject Astea = this.GetComponent<Astelutza>().Astea;
         Destroy(Astea);
+        cameraCurenta.GetComponent<detaliiIncapere>().inamici.Remove(this.gameObject);
+
+        //daca nu mai sunt deloc inamici in viata
+        if (cameraCurenta.GetComponent<detaliiIncapere>().inamici.Count <= 0)
+        {
+            //deschidem usile
+            cameraCurenta.GetComponent<detaliiIncapere>().OpenUp();
+
+            //marcam camera completata
+            cameraCurenta.GetComponent<detaliiIncapere>().completata = true;
+        }
+
+        Destroy(this.gameObject);
+    }
+
+    //adaugare inamic la detaliiIncapere
+    public void pontareaInamicului()
+    {
+        cameraCurenta.GetComponent<detaliiIncapere>().inamici.Add(this.gameObject);
     }
 
     private void Update()
