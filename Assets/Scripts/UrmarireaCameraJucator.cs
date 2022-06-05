@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Urmarirea : MonoBehaviour
+public class UrmarireaCameraJucator : MonoBehaviour
 {
     public Transform tinta;
     public Vector3 decalaj;

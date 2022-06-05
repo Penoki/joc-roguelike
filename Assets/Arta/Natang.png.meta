@@ -5,6 +5,15 @@ TextureImporter:
   - first:
       213: 2594987313201834101
     second: Natang_0
+  - first:
+      213: -7053688637394394067
+    second: Natang_1
+  - first:
+      213: -7957309081370987012
+    second: Natang_2
+  - first:
+      213: -8043910824287660651
+    second: ProiectilNatang
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -110,6 +119,69 @@ TextureImporter:
       bones: []
       spriteID: 5786a08663f330420800000000000000
       internalID: 2594987313201834101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Natang_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d24e5eb6e834c1e90800000000000000
+      internalID: -7053688637394394067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Natang_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf574e4dc85f19190800000000000000
+      internalID: -7957309081370987012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProiectilNatang
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5951a6949b94e5090800000000000000
+      internalID: -8043910824287660651
       vertices: []
       indices: 
       edges: []
