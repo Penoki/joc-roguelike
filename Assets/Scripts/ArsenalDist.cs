@@ -5,7 +5,7 @@ using UnityEngine;
 public class ArsenalDist : MonoBehaviour
 {
     public LayerMask blocadaMasca;
-    bool alert = false, racire = false;
+    bool alert = false, racire = true;
     public float timpRacire = 2f;
     private GameObject inamicParinte, jucator;
     public List<Transform> pozitiiMaterializareProiectil;
@@ -37,6 +37,7 @@ public class ArsenalDist : MonoBehaviour
         pozitiiMaterializareProiectil.Add(inamicParinte.transform.Find("PozSpate").transform);
         pozitiiMaterializareProiectil.Add(inamicParinte.transform.Find("PozStanga").transform);
         pozitiiMaterializareProiectil.Add(inamicParinte.transform.Find("PozDreapta").transform);
+        Invoke("ResetRacire", timpRacire);
     }
 
     // Update is called once per frame

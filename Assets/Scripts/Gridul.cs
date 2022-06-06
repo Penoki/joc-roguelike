@@ -7,7 +7,7 @@ public class Gridul : MonoBehaviour
     //public Transform jucator;
     public LayerMask blocadaMasca;
     public GameObject incapere;
-    public int[,] grilajCamera;
+    public float[,] grilajCamera;
     //definirea suprafetei care gridul o va acoperi
     public Vector2 marimeGridLume;
     //definirea spatiului ocupat de fiecare nod
@@ -40,9 +40,11 @@ public class Gridul : MonoBehaviour
     //metoda pentru convertirea pozitiei din lume in pozitie de pe grid
     public Nod coordLume_to_Nod(Vector3 pozLume)
     {
+        if (pozLume == null)
+        { return null; }
         //substragere decalaj camera
         pozLume = pozLume - decalajCameraParinte;
-        //calcul procentaj unde s-ar afla dintre celule de pe grid, cazul nostru 34
+        //calcul procentaj unde s-ar afla dintre celule de pe grid, cazul nostru 35
         float procentX = (pozLume.x - decalaj + marimeGridLume.x / 2) / marimeGridLume.x;
         float procentY = (pozLume.y - decalaj + marimeGridLume.y / 2) / marimeGridLume.y;
         //daca jucatorul se afla in afara gridului, nu ne va da valori eronate
@@ -52,6 +54,7 @@ public class Gridul : MonoBehaviour
         int x = Mathf.RoundToInt((marimeGridX - 1) * procentX);
         int y = Mathf.RoundToInt((marimeGridY - 1) * procentY);
 
+        if (grid[x, y] == null) return null;
         return grid[x, y];
     }
 
@@ -100,6 +103,7 @@ public class Gridul : MonoBehaviour
     }
 
     //vizualizare in joc
+    /*
     private void OnDrawGizmos()
     {
         //desenare cu gizmos a gridului
@@ -121,6 +125,7 @@ public class Gridul : MonoBehaviour
             }
         }
     }
+    */
 
     //functie care returneaza vecinii unui NOD
     public List<Nod> iaVecinii(Nod nodul)

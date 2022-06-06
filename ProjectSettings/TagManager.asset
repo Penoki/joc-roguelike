@@ -9,6 +9,7 @@ TagManager:
   - inamic
   - pereti
   - obstacol
+  - generator
   layers:
   - Default
   - TransparentFX

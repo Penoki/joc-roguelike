@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class detaliiIncapere : MonoBehaviour
 {
-    public List<Vector2Int> obstacoleCurente, puncteMaterializare;
+    public List<Vector2> obstacoleCurente, puncteMaterializare;
     public List<GameObject> usi, inamici;
     public char tipIncapere;
-    public int N; //dimensiunea incaperii
+    public float N; //dimensiunea incaperii
     public bool completata = false;
 
     //obstacole = 1, teren liber = 0
     //initializare cu 0
-    public int[,] grilajCamera = new int[,] { { 0, 0, 0, 0, 0, 0, 0},
-                                              { 0, 0, 0, 0, 0, 0, 0 },
-                                              { 0, 0, 0, 0, 0, 0, 0 },
-                                              { 0, 0, 0, 0, 0, 0, 0 },
-                                              { 0, 0, 0, 0, 0, 0, 0 },
-                                              { 0, 0, 0, 0, 0, 0, 0 },
-                                              { 0, 0, 0, 0, 0, 0, 0 } };
+    public float[,] grilajCamera = new float[,] { { 0f, 0f, 0f, 0f, 0f, 0f, 0f},
+                                              { 0f, 0f, 0f, 0f, 0f, 0f, 0f },
+                                              { 0f, 0f, 0f, 0f, 0f, 0f, 0f },
+                                              { 0f, 0f, 0f, 0f, 0f, 0f, 0f },
+                                              { 0f, 0f, 0f, 0f, 0f, 0f, 0f },
+                                              { 0f, 0f, 0f, 0f, 0f, 0f, 0f },
+                                              { 0f, 0f, 0f, 0f, 0f, 0f, 0f } };
 
 
     private void Start()
@@ -32,10 +32,10 @@ public class detaliiIncapere : MonoBehaviour
 
     public void ActualizareGrilaCamera()
     {
-        foreach (Vector2Int ob in obstacoleCurente)
+        foreach (Vector2 ob in obstacoleCurente)
         {
             //think about it
-            grilajCamera[ob.x + (N - 1) / 2, ob.y + (N - 1) / 2] = 1;
+            grilajCamera[(int)(ob.x + (N - 1) / 2), (int)(ob.y + (N - 1) / 2)] = 1f;
         }
     }
 

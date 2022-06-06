@@ -6,6 +6,8 @@ public class Astelutza : MonoBehaviour
 {
     public GameObject AsteaMatritza, Astea;
     public GameObject tzinta, cautator;
+    public float timpIncepere = 0.1f;
+    private bool pornit = false;
     Gridul grid;
 
     int pctCurent = 0;
@@ -15,6 +17,8 @@ public class Astelutza : MonoBehaviour
 
     private void Start()
     {
+        cautator = new GameObject();
+        tzinta = new GameObject();
         //instantiere A*grid pentru acest inamic
         AsteaMatritza = Resources.Load("Prefabs/A_grid") as GameObject;
         Astea = Instantiate(AsteaMatritza, this.transform.parent.transform);
@@ -24,10 +28,17 @@ public class Astelutza : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         tzinta = GameObject.FindWithTag("Player");
         cautator = this.gameObject;
+        Invoke("Incepe", timpIncepere);
+    }
+
+    void Incepe()
+    {
+        pornit = true;
     }
 
     void Update()
     {
+        if(pornit)
         GasesteCalea(cautator.transform.position, tzinta.transform.position);
     }
 
@@ -73,6 +84,7 @@ public class Astelutza : MonoBehaviour
     {
         Nod nodA = grid.coordLume_to_Nod(pozA);
         Nod nodB = grid.coordLume_to_Nod(pozB);
+        if (nodA == null || nodB == null) { return; }
 
         //initializare lista pt nodurile care trebuie sa fie evaluate
         List<Nod> OPEN = new List<Nod>();

@@ -27,15 +27,15 @@ public class Teleportinator : MonoBehaviour
             //nu lasam jucatorul sa se miste un timp de 10 milisecunde
             coliziuneJ.GetComponent<Jucator>().enabled = false;
             //apelare functie dupa 100 milisecunde
-            Invoke("taxaDeDrumAchitata", 0.1f);
+            Invoke("taxaDeDrumAchitata", 0.15f);
 
             if (cameraDestinatie.GetComponent<detaliiIncapere>().tipIncapere == 'N' && !cameraDestinatie.GetComponent<detaliiIncapere>().completata)
             {
                 //inchiderea ushilor
                 cameraDestinatie.GetComponent<detaliiIncapere>().LockDown();
 
-                //apelare functie dupa 100 milisecunde
-                Invoke("MaterializareInamici", 0.1f);
+                //apelare functie dupa 200 milisecunde
+                Invoke("MaterializareInamici", 0.15f);
             }
         }
     }

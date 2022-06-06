@@ -123,6 +123,7 @@ MonoBehaviour:
   Astea: {fileID: 0}
   tzinta: {fileID: 0}
   cautator: {fileID: 7432000463257526854}
+  timpIncepere: 0.1
   viteza: 1.4
   marja: 0.01
   distanta: 0.1
