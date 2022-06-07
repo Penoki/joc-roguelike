@@ -491,10 +491,13 @@ public class GeneratorIncaperi : MonoBehaviour
                         camera.GetComponent<detaliiIncapere>().obstacoleCurente.Add(new Vector2Int(d[i], d[i + 1]));
                     }
                 }
+
+                //adaugare script pentru camera finala
+                camera.AddComponent<CameraFinala>();
+
                 break;
         }
-
-        camera.GetComponent<detaliiIncapere>().N = camereN + 1;
+        
         camera.GetComponent<detaliiIncapere>().ActualizareGrilaCamera();
         camera.GetComponent<detaliiIncapere>().tipIncapere = tipCamera;
 

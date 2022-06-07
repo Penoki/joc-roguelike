@@ -22,7 +22,9 @@ public class detaliiIncapere : MonoBehaviour
 
 
     private void Start()
-    {
+    {   
+        //dimensiune incapere consacrata
+        N = 7;
         if (puncteMaterializare != null && tipIncapere == 'N')
         {
             this.gameObject.AddComponent<MaterializareInamiciCN>();

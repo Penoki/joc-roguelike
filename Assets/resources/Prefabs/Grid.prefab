@@ -61,8 +61,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacoleCurente: []
   puncteMaterializare: []
+  usi: []
+  inamici: []
   tipIncapere: 0
-  N: 0
+  N: 7
+  completata: 0
 --- !u!1 &8341474655913680959
 GameObject:
   m_ObjectHideFlags: 0

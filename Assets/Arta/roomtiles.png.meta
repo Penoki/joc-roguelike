@@ -104,6 +104,12 @@ TextureImporter:
   - first:
       213: 5760341175403997538
     second: roomtiles_33
+  - first:
+      213: 6245933719557399998
+    second: endButton
+  - first:
+      213: 3626335898099078472
+    second: endButton_apasat
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -910,6 +916,48 @@ TextureImporter:
       bones: []
       spriteID: 269e20987c7d0ff40800000000000000
       internalID: 5760341175403997538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: endButton
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb56ad420a30ea650800000000000000
+      internalID: 6245933719557399998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: endButton_apasat
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84551724945535230800000000000000
+      internalID: 3626335898099078472
       vertices: []
       indices: 
       edges: []
