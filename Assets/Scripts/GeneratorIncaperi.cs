@@ -43,8 +43,10 @@ public class GeneratorIncaperi : MonoBehaviour
 
     void Start()
     {
-        if (!introduManualSamanta)
-        { sambure = System.DateTime.Now.Millisecond; } //fortuita generare de samanta
+        if (!Samanta.introdusa)
+        { sambure = System.DateTime.Now.Millisecond; Samanta.samanta = sambure; Samanta.introdusa = true; } //fortuita generare de samanta
+        else
+        { sambure = Samanta.samanta; }
         Random.InitState(sambure);
 
         char[,] grilaj = CreareTablaJoc(sambure);
@@ -497,7 +499,7 @@ public class GeneratorIncaperi : MonoBehaviour
 
                 break;
         }
-        
+
         camera.GetComponent<detaliiIncapere>().ActualizareGrilaCamera();
         camera.GetComponent<detaliiIncapere>().tipIncapere = tipCamera;
 

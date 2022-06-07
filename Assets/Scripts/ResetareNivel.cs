@@ -18,6 +18,7 @@ public class ResetareNivel : MonoBehaviour
     //resetare nivel
     public void RestartNivel()
     {
+        Samanta.samanta ++;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
