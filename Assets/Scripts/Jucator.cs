@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Jucator : MonoBehaviour
 {
@@ -95,6 +96,7 @@ public class Jucator : MonoBehaviour
             if (pctSanatate <= 0)
             {
                 Destroy(this.gameObject);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
             }
         }
     }
