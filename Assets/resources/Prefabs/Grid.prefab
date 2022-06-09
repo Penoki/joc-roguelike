@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 8341474655913680956}
   - component: {fileID: 8341474655913680957}
   - component: {fileID: 8341474655913680955}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Perete
   m_TagString: pereti
   m_Icon: {fileID: 0}
@@ -631,9 +631,9 @@ GameObject:
   - component: {fileID: 8341474656567810330}
   - component: {fileID: 8341474656567810331}
   - component: {fileID: 8341474656567810329}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Obstacol
-  m_TagString: Untagged
+  m_TagString: obstacol
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

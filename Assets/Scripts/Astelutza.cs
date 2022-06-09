@@ -38,8 +38,8 @@ public class Astelutza : MonoBehaviour
 
     void Update()
     {
-        if(pornit)
-        GasesteCalea(cautator.transform.position, tzinta.transform.position);
+        if (pornit)
+            GasesteCalea(cautator.transform.position, tzinta.transform.position);
     }
 
     private void FixedUpdate()

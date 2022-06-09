@@ -7,10 +7,10 @@ public class Marioneta : MonoBehaviour
     public SpriteRenderer sr;
     public double sanatate = 10;
     public double ranireRacireSec = 1.4;
-    public float timpPauza=1.5f;
+    public float timpPauza = 1.5f;
     private int msecundaRanit, secundaRanit;
     public GameObject jucator, cameraCurenta;
-    public bool ranit = false, atingere = false;
+    public bool ranit = false, atingere = false, obturat = false;
 
     private void Start()
     {
@@ -110,6 +110,16 @@ public class Marioneta : MonoBehaviour
 
             jucator.GetComponent<Jucator>().primitDauna();
         }
+
+        verificaJucatorObstacol();
+        if (obturat && this.GetComponent<Astelutza>().enabled == true)
+        {
+            this.GetComponent<Astelutza>().enabled = false;
+        }
+        else if(!obturat && this.GetComponent<Astelutza>().enabled == false)
+        {
+            this.GetComponent<Astelutza>().enabled = true;
+        }
     }
 
     public void GataPauza()
@@ -117,4 +127,27 @@ public class Marioneta : MonoBehaviour
         this.GetComponent<Astelutza>().enabled = true;
     }
 
+    public void Pauza()
+    {
+        this.GetComponent<Astelutza>().enabled = false;
+    }
+
+    //verificare jucator daca se afla/zboara deasupra unui obstacol
+    public void verificaJucatorObstacol()
+    {
+        Vector2 ju = jucator.transform.position - cameraCurenta.transform.position;
+        float N = cameraCurenta.GetComponent<detaliiIncapere>().N;
+        float[,] g = cameraCurenta.GetComponent<detaliiIncapere>().grilajCamera;
+        if (g[(int)(ju.x + (N - 1) / 2), (int)(ju.y + (N - 1) / 2)] == 1f)
+        {
+            obturat = true;
+            Debug.Log("DA");
+        }
+        else
+        {
+            obturat = false;
+            Debug.Log("NU");
+        }
+
+    }
 }

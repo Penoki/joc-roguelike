@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 232011113528194622}
   - component: {fileID: 5863283743246497778}
   - component: {fileID: 2042936476065597909}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Proiectil
   m_TagString: ostil
   m_Icon: {fileID: 0}
