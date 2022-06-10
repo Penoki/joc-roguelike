@@ -11,10 +11,18 @@ public class Jucator : MonoBehaviour
     public Rigidbody2D rb;
     public Animator animator;
     public SpriteRenderer srJ, srC;
+    public static Color srNcolor;
     private int msecundaRanit, secundaRanit, minutRanire, secundaRanire;
     private bool ranit = false, ranire = false;
 
     Vector2 vectorMiscare;
+
+    private void Start()
+    {
+        srNcolor = new Color(1, 1, 1, 1);
+        
+    }
+
     //Apelat o data per cadru
     void Update()
     {
@@ -38,8 +46,8 @@ public class Jucator : MonoBehaviour
         {
             if ((msecundaRanit + secundaRanit * 1000) <= (System.DateTime.Now.Millisecond + System.DateTime.Now.Second * 1000))
             {
-                srJ.color = new Color(1, 1, 1, 1);
-                srC.color = new Color(1, 1, 1, 1);
+                srJ.color = srNcolor;
+                srC.color = srNcolor;
                 ranit = false;
             }
         }

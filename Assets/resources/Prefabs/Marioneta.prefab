@@ -156,10 +156,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 7432000463257526852}
-  sanatate: 10
+  sanatate: 1
   ranireRacireSec: 1
   timpPauza: 1.5
   jucator: {fileID: 0}
   cameraCurenta: {fileID: 0}
   ranit: 0
   atingere: 0
+  obturat: 0

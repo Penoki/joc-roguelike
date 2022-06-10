@@ -29,6 +29,10 @@ public class Teleportinator : MonoBehaviour
             //apelare functie dupa 100 milisecunde
             Invoke("taxaDeDrumAchitata", 0.15f);
 
+            //transmitere tag cameraCurenta
+            cameraCurenta.tag = "Untagged";
+            cameraDestinatie.tag = "cameraCurenta";
+
             if (cameraDestinatie.GetComponent<detaliiIncapere>().tipIncapere == 'N' && !cameraDestinatie.GetComponent<detaliiIncapere>().completata)
             {
                 //inchiderea ushilor

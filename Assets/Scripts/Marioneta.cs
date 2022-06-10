@@ -105,12 +105,13 @@ public class Marioneta : MonoBehaviour
         if (atingere)
         {
             //pauza dupa fiecare atac
-            this.GetComponent<Astelutza>().enabled = false;
+            Pauza();
             Invoke("GataPauza", timpPauza);
 
             jucator.GetComponent<Jucator>().primitDauna();
         }
 
+        /*
         verificaJucatorObstacol();
         if (obturat && this.GetComponent<Astelutza>().enabled == true)
         {
@@ -120,18 +121,21 @@ public class Marioneta : MonoBehaviour
         {
             this.GetComponent<Astelutza>().enabled = true;
         }
+        */
+        
     }
 
     public void GataPauza()
     {
-        this.GetComponent<Astelutza>().enabled = true;
+        this.GetComponent<Astelutza>().Pornit = true;
     }
 
     public void Pauza()
     {
-        this.GetComponent<Astelutza>().enabled = false;
+        this.GetComponent<Astelutza>().Pornit = false;
     }
 
+    /*
     //verificare jucator daca se afla/zboara deasupra unui obstacol
     public void verificaJucatorObstacol()
     {
@@ -150,4 +154,6 @@ public class Marioneta : MonoBehaviour
         }
 
     }
+    */
+    
 }

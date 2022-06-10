@@ -274,9 +274,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 4175861463809199065}
-  sanatate: 10
+  sanatate: 1
   ranireRacireSec: 1
   jucator: {fileID: 0}
+  cameraCurenta: {fileID: 0}
   ranit: 0
   atingere: 0
 --- !u!70 &4175861463809199063

@@ -346,6 +346,8 @@ public class GeneratorIncaperi : MonoBehaviour
                         camera.GetComponent<detaliiIncapere>().obstacoleCurente.Add(new Vector2Int(a[i], a[i + 1]));
                     }
                 }
+
+                
                 break;
 
             case 'N':
@@ -447,6 +449,10 @@ public class GeneratorIncaperi : MonoBehaviour
                         camera.GetComponent<detaliiIncapere>().obstacoleCurente.Add(new Vector2Int(c[i], c[i + 1]));
                     }
                 }
+
+                //adaugare script pentru camera finala
+                camera.AddComponent<CameraComori>();
+
                 break;
             case 'B':
                 int[] d = sabloaneBObs[tipSablon];          //alegere template

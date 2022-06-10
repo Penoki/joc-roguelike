@@ -13,6 +13,7 @@ public class CameraFinala : MonoBehaviour
 
         //creare buton
         Instantiate(butonFinNivel, this.transform);
+
     }
 
 }

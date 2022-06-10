@@ -6,19 +6,18 @@ public class Astelutza : MonoBehaviour
 {
     public GameObject AsteaMatritza, Astea;
     public GameObject tzinta, cautator;
-    public float timpIncepere = 0.1f;
-    private bool pornit = false;
+    public float timpIncepere = 0.1f, delayActivareAstea = 0f;
+    private bool pornit = false, cautareCale = false;
     Gridul grid;
 
     int pctCurent = 0;
     public float viteza = 55f, marja = 0.01f, distanta = 0.01f;
     Rigidbody2D rb;
 
+    public bool Pornit { get => pornit; set => pornit = value; }
 
     private void Start()
     {
-        cautator = new GameObject();
-        tzinta = new GameObject();
         //instantiere A*grid pentru acest inamic
         AsteaMatritza = Resources.Load("Prefabs/A_grid") as GameObject;
         Astea = Instantiate(AsteaMatritza, this.transform.parent.transform);
@@ -38,8 +37,17 @@ public class Astelutza : MonoBehaviour
 
     void Update()
     {
-        if (pornit)
-            GasesteCalea(cautator.transform.position, tzinta.transform.position);
+        if (pornit && !cautareCale && !PauzaJoc.apasat)
+        {
+            cautareCale = true;
+            Invoke("GasesteCaleCuDelay", delayActivareAstea);
+        }
+
+    }
+
+    public void GasesteCaleCuDelay()
+    {
+        GasesteCalea(cautator.transform.position, tzinta.transform.position);
     }
 
     private void FixedUpdate()
@@ -47,7 +55,7 @@ public class Astelutza : MonoBehaviour
         Vector2 p = tzinta.transform.position;
         if ((rb.position.x >= (p.x - marja) && rb.position.x <= (p.x + marja)) && (rb.position.y >= (p.y - marja) && rb.position.y <= (p.y + marja))) { return; }
 
-        if (grid.carare != null)
+        if (grid.carare != null && !PauzaJoc.apasat)
         {
             if (grid.carare.Count != 0)
             {
@@ -84,7 +92,7 @@ public class Astelutza : MonoBehaviour
     {
         Nod nodA = grid.coordLume_to_Nod(pozA);
         Nod nodB = grid.coordLume_to_Nod(pozB);
-        if (nodA == null || nodB == null) { return; }
+        if (nodA == null || nodB == null) { cautareCale = false; return;  }
 
         //initializare lista pt nodurile care trebuie sa fie evaluate
         List<Nod> OPEN = new List<Nod>();
@@ -111,10 +119,22 @@ public class Astelutza : MonoBehaviour
             OPEN.Remove(curent);
             CLOSED.Add(curent);
 
+            //Debug.Log("inca ruleaza");
             //daca NOD coincide cu tzinta, atunci ne oprim
-            if (curent == nodB)
+            if (curent == nodB || OPEN.Count >= 50)
             {
-                reiaCalea(nodA, curent);
+                cautareCale = false;
+                //Debug.Log("terminat");
+                if (curent == nodB)
+                {
+                    delayActivareAstea = 0f;
+                    reiaCalea(nodA, curent);
+                }
+                else
+                {
+                    delayActivareAstea = 1f;
+                    grid.carare = null;
+                }
                 return;
             }
 
@@ -130,6 +150,7 @@ public class Astelutza : MonoBehaviour
                 int nouCostMiscareCatreVecin = curent.Gcost + iaDistanta(curent, vecin);
                 if (nouCostMiscareCatreVecin < curent.Gcost || !OPEN.Contains(vecin))
                 {
+                    //Debug.Log("Trecut");
                     //calculul costurilor
                     vecin.Gcost = nouCostMiscareCatreVecin;
                     vecin.Hcost = iaDistanta(vecin, nodB);

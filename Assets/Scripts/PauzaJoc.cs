@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PauzaJoc : MonoBehaviour
 {
-    bool apasat = false;
+    public static bool apasat = false;
     public GameObject fundal, butoane, cameraVideo;
     private void Update()
     {

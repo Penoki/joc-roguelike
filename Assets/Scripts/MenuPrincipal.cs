@@ -21,8 +21,13 @@ public class MenuPrincipal : MonoBehaviour
             Samanta.samanta = int.Parse(inputCamp.text);
         }
 
-        // in caz de ESC-> Meniu Principal -> Start, sa nu ramana pauza
-        if (Time.timeScale == 0) Time.timeScale = 1;
+        // in caz de ESC-> Meniu Principal -> Start
+        if (Time.timeScale == 0) 
+        {
+            //sa nu ramana pauza
+            Time.timeScale = 1;
+            PauzaJoc.apasat = false;
+        }
 
         //schimbare scena cu cea de joc
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
