@@ -76,8 +76,13 @@ public class Manechin : MonoBehaviour
             cameraCurenta.GetComponent<detaliiIncapere>().OpenUp();
 
             //marcam camera completata
-            cameraCurenta.GetComponent<detaliiIncapere>().completata = true;
+            cameraCurenta.GetComponent<detaliiIncapere>().Invoke("CompletareCamera", 1);
+            //cameraCurenta.GetComponent<detaliiIncapere>().completata = true;
         }
+
+        //adaugare punctaj
+        Punctaj.Punctare = Punctaj.Punctare + 100;
+        Debug.Log(Punctaj.Punctare);
 
         Destroy(this.gameObject);
     }

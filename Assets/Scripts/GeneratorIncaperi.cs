@@ -347,7 +347,8 @@ public class GeneratorIncaperi : MonoBehaviour
                     }
                 }
 
-                
+                //adaugare tag camera curenta
+                camera.GetComponent<detaliiIncapere>().tag = "cameraCurenta";
                 break;
 
             case 'N':

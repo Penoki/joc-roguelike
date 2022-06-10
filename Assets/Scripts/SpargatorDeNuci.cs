@@ -79,7 +79,8 @@ public class SpargatorDeNuci : MonoBehaviour
             cameraCurenta.GetComponent<detaliiIncapere>().OpenUp();
 
             //marcam camera completata
-            cameraCurenta.GetComponent<detaliiIncapere>().completata = true;
+            cameraCurenta.GetComponent<detaliiIncapere>().Invoke("CompletareCamera", 1);
+            //cameraCurenta.GetComponent<detaliiIncapere>().completata = true;
         }
 
         Destroy(this.gameObject);

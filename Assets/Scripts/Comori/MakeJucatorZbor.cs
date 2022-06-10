@@ -13,9 +13,12 @@ public class MakeJucatorZbor : MonoBehaviour
             collision.gameObject.layer = 6;
 
             //facut jucator sa arate ca o fantoma :))
-            Jucator.srNcolor = new Color(1,1,1,0.8f);
+            Jucator.srNcolor = new Color(1, 1, 1, 0.8f);
             collision.GetComponent<Jucator>().srC.color = Jucator.srNcolor;
             collision.GetComponent<Jucator>().srJ.color = Jucator.srNcolor;
+
+            //adaugare oleaca viteza la jucator
+            collision.GetComponent<Jucator>().vitezaMiscare += 0.2f;
         }
     }
 }

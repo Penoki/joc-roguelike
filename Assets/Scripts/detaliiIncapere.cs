@@ -61,4 +61,10 @@ public class detaliiIncapere : MonoBehaviour
         }
     }
 
+    //completare camera
+    public void CompletareCamera()
+    {
+        this.completata = true;
+    }
+
 }

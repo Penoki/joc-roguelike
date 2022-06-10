@@ -25,7 +25,7 @@ public class Teleportinator : MonoBehaviour
             //teleportare jucator
             coliziuneJ.transform.position = destinatie.position;
             //nu lasam jucatorul sa se miste un timp de 10 milisecunde
-            coliziuneJ.GetComponent<Jucator>().enabled = false;
+            coliziuneJ.GetComponent<Jucator>().tpPauza = true;
             //apelare functie dupa 100 milisecunde
             Invoke("taxaDeDrumAchitata", 0.15f);
 
@@ -53,7 +53,7 @@ public class Teleportinator : MonoBehaviour
     //permitere jucator sa se miste
     public void taxaDeDrumAchitata()
     {
-        coliziuneJ.GetComponent<Jucator>().enabled = true;
+        coliziuneJ.GetComponent<Jucator>().tpPauza = false;
     }
 
     public void MaterializareInamici()
