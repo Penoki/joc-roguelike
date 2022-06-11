@@ -28,7 +28,7 @@ public class ProiectilDusman : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
-            collision.GetComponent<Jucator>().primitDauna();
+            collision.GetComponent<Jucator>().primitDauna(1);
             Destroy(this.gameObject);
             return;
         }

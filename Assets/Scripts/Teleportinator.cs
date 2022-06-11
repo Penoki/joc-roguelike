@@ -26,7 +26,7 @@ public class Teleportinator : MonoBehaviour
             coliziuneJ.transform.position = destinatie.position;
             //nu lasam jucatorul sa se miste un timp de 10 milisecunde
             coliziuneJ.GetComponent<Jucator>().tpPauza = true;
-            //apelare functie dupa 100 milisecunde
+            //apelare functie dupa 150 milisecunde
             Invoke("taxaDeDrumAchitata", 0.15f);
 
             //transmitere tag cameraCurenta
@@ -38,8 +38,17 @@ public class Teleportinator : MonoBehaviour
                 //inchiderea ushilor
                 cameraDestinatie.GetComponent<detaliiIncapere>().LockDown();
 
-                //apelare functie dupa 200 milisecunde
+                //apelare functie dupa 150 milisecunde
                 Invoke("MaterializareInamici", 0.15f);
+            }
+
+            if (cameraDestinatie.GetComponent<detaliiIncapere>().tipIncapere == 'B' && !cameraDestinatie.GetComponent<detaliiIncapere>().completata)
+            {
+                //inchiderea ushilor
+                cameraDestinatie.GetComponent<detaliiIncapere>().LockDown();
+
+                //apelare functie dupa 150 milisecunde
+                Invoke("MaterializareZmeu", 0.15f);
             }
         }
     }
@@ -59,5 +68,10 @@ public class Teleportinator : MonoBehaviour
     public void MaterializareInamici()
     {
         cameraDestinatie.GetComponent<MaterializareInamiciCN>().inamiciMaterializare();
+    }
+
+    public void MaterializareZmeu()
+    {
+        cameraDestinatie.GetComponent<CameraFinala>().CreareZmeu();
     }
 }

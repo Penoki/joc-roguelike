@@ -113,7 +113,7 @@ public class Marioneta : MonoBehaviour
             Pauza();
             Invoke("GataPauza", timpPauza);
 
-            jucator.GetComponent<Jucator>().primitDauna();
+            jucator.GetComponent<Jucator>().primitDauna(1);
         }
 
         /*

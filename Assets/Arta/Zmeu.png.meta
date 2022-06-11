@@ -5,6 +5,12 @@ TextureImporter:
   - first:
       213: -6134692158974059506
     second: Zmeu_0
+  - first:
+      213: 8958164093966989277
+    second: Zmeu_1
+  - first:
+      213: -5141673511340543280
+    second: ProiectilZmeu
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -98,11 +104,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 255
+        y: 256
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.23}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -110,6 +116,48 @@ TextureImporter:
       bones: []
       spriteID: e0c1af10cf13ddaa0800000000000000
       internalID: -6134692158974059506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zmeu_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.23}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd7bf84f7cac15c70800000000000000
+      internalID: 8958164093966989277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProiectilZmeu
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 256
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d2f285ee2b15a8b0800000000000000
+      internalID: -5141673511340543280
       vertices: []
       indices: 
       edges: []

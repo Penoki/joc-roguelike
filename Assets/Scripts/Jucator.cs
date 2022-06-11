@@ -70,7 +70,7 @@ public class Jucator : MonoBehaviour
         rb.MovePosition(rb.position + vectorMiscare * vitezaMiscare * Time.fixedDeltaTime);
     }
 
-    public void primitDauna()
+    public void primitDauna(int dauna)
     {
         if (!ranire)
         {
@@ -78,7 +78,7 @@ public class Jucator : MonoBehaviour
             Punctaj.Punctare -= 50;
 
             ranire = true;
-            pctSanatate--;
+            pctSanatate-=dauna;
             ranit = true;
             srJ.color = new Color(1, 0.6f, 0.6f, 1);
             srC.color = new Color(1, 0.6f, 0.6f, 1);

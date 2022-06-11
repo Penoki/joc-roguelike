@@ -109,7 +109,7 @@ public class SpargatorDeNuci : MonoBehaviour
             //this.GetComponent<Astelutza>().enabled = false;
             Invoke("GataPauza", timpPauza);
 
-            jucator.GetComponent<Jucator>().primitDauna();
+            jucator.GetComponent<Jucator>().primitDauna(1);
         }
     }
 

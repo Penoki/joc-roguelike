@@ -11,7 +11,7 @@ public class Astelutza : MonoBehaviour
     Gridul grid;
 
     int pctCurent = 0;
-    public float viteza = 55f, marja = 0.01f, distanta = 0.01f;
+    public float viteza = 1.4f, marja = 0.01f, distanta = 0.01f;
     Rigidbody2D rb;
 
     public bool Pornit { get => pornit; set => pornit = value; }

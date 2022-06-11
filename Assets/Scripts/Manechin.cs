@@ -100,7 +100,7 @@ public class Manechin : MonoBehaviour
 
         if (atingere)
         {
-            jucator.GetComponent<Jucator>().primitDauna();
+            jucator.GetComponent<Jucator>().primitDauna(1);
         }
     }
 
