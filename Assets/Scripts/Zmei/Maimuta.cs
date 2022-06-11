@@ -33,7 +33,7 @@ public class Maimuta : MonoBehaviour
         rb = this.GetComponent<Rigidbody2D>();
 
         //luare referinta camera
-        //cameraCurenta = this.transform.parent.gameObject;
+        cameraCurenta = this.transform.parent.gameObject;
 
         //calcul pragDistanta
         pragDistanta = jucator.GetComponent<CapsuleCollider2D>().size.x / 2 + this.GetComponent<CapsuleCollider2D>().size.x / 2 + 0.1f;
@@ -248,7 +248,6 @@ public class Maimuta : MonoBehaviour
 
     public void Distruge()
     {
-        /*
         cameraCurenta.GetComponent<detaliiIncapere>().inamici.Remove(this.gameObject);
 
         //daca nu mai sunt deloc inamici in viata
@@ -259,9 +258,11 @@ public class Maimuta : MonoBehaviour
 
             //marcam camera completata
             cameraCurenta.GetComponent<detaliiIncapere>().Invoke("CompletareCamera", 1);
-            //cameraCurenta.GetComponent<detaliiIncapere>().completata = true;
+
+            //cream buton
+            cameraCurenta.GetComponent<CameraFinala>().CreareButon();
         }
-        */
+
         //adaugare punctaj
         Punctaj.Punctare = Punctaj.Punctare + 800;
         Debug.Log(Punctaj.Punctare);
