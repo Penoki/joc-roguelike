@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 4175861463809199065}
-  sanatate: 1
+  sanatate: 4
   ranireRacireSec: 1
   jucator: {fileID: 0}
   cameraCurenta: {fileID: 0}

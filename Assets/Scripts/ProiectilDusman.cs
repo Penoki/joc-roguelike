@@ -15,7 +15,7 @@ public class ProiectilDusman : MonoBehaviour
     void Start()
     {
         rbProiectil = this.GetComponent<Rigidbody2D>();
-        //distrugere proiectil dupa distProiectil secunde
+        //distrugere proiectil dupa secunde
         Destroy(this.gameObject, timpProiectil);
 
         Invoke("Asteapta", 0.1f);

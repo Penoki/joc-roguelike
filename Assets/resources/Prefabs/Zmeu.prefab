@@ -125,8 +125,8 @@ MonoBehaviour:
   verifica: 1
   ranit: 0
   urmarire: 0
-  sanatate: 20
-  santateMax: 20
+  sanatate: 24
+  santateMax: 24
   pragDistanta: 0
   distanta: 0
   nuca: {fileID: 4139281000964788407, guid: c0287c68ea92a534f9c1385468e08a16, type: 3}

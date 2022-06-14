@@ -11,9 +11,9 @@ public class Cap : MonoBehaviour
     Vector2 vectorMiscare,vectorDirectie; //vectorDirectie pentru a stii unde ataca
 
     //parametrii/proprietati ale proiectilului
-    private float vitezaProiectil = 3.8f;
+    private float vitezaProiectil = 3.5f;
     private double daunaProiectil = 1f;
-    private float distantaProiectil = 1.4f;
+    private float distantaProiectil = 0.6f;
     private int indexProiectil = 0;
     private bool permisClipit = false;
     private bool proiectilSpate = false; //pentru ordinea de afisare sprite-uri

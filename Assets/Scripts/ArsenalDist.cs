@@ -6,7 +6,7 @@ public class ArsenalDist : MonoBehaviour
 {
     public LayerMask blocadaMasca;
     bool alert = false, racire = true;
-    public float timpRacire = 2f;
+    public float timpRacire = 1.2f;
     private GameObject inamicParinte, jucator;
     public List<Transform> pozitiiMaterializareProiectil;
     public ProiectilDusman nuca;

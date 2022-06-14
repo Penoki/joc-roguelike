@@ -277,8 +277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2e568aeeb4479546a7a629a63e54856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vitezaMiscare: 3.6
-  pctSanatate: 222
+  vitezaMiscare: 3.5
+  pctSanatate: 8
   pctSanatateMax: 8
   timpInvincibil: 1
   rb: {fileID: 200438070}
@@ -988,7 +988,7 @@ MonoBehaviour:
   - {fileID: 135551068}
   - {fileID: 861836207}
   - {fileID: 1348186684}
-  rataDeClipire: 2.5
+  rataDeClipire: 1.8
 --- !u!1 &859799140
 GameObject:
   m_ObjectHideFlags: 0

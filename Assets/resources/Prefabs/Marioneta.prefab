@@ -124,7 +124,8 @@ MonoBehaviour:
   tzinta: {fileID: 0}
   cautator: {fileID: 7432000463257526854}
   timpIncepere: 0.1
-  viteza: 1.4
+  delayActivareAstea: 0
+  viteza: 2.4
   marja: 0.01
   distanta: 0.1
 --- !u!70 &7432000463257527226
@@ -156,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 7432000463257526852}
-  sanatate: 1
+  sanatate: 6
   ranireRacireSec: 1
   timpPauza: 1.5
   jucator: {fileID: 0}
