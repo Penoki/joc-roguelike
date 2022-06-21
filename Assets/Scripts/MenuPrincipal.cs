@@ -17,12 +17,15 @@ public class MenuPrincipal : MonoBehaviour
         }
         else
         {
-            Samanta.introdusa = true;
-            Samanta.samanta = int.Parse(inputCamp.text);
+            if (double.Parse(inputCamp.text) <= int.MaxValue && double.Parse(inputCamp.text) >= int.MinValue)
+            {
+                Samanta.introdusa = true;
+                Samanta.samanta = int.Parse(inputCamp.text);
+            }
         }
 
         // in caz de ESC-> Meniu Principal -> Start
-        if (Time.timeScale == 0) 
+        if (Time.timeScale == 0)
         {
             //sa nu ramana pauza
             Time.timeScale = 1;

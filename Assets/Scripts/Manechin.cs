@@ -67,6 +67,7 @@ public class Manechin : MonoBehaviour
 
     public void Distruge()
     {
+        
         cameraCurenta.GetComponent<detaliiIncapere>().inamici.Remove(this.gameObject);
 
         //daca nu mai sunt deloc inamici in viata
@@ -83,7 +84,7 @@ public class Manechin : MonoBehaviour
         //adaugare punctaj
         Punctaj.Punctare = Punctaj.Punctare + 100;
         Debug.Log(Punctaj.Punctare);
-
+        
         Destroy(this.gameObject);
     }
 
