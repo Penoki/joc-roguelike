@@ -22,10 +22,16 @@ public class ResetareNivel : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player" && nuDeasupra)
+        if (collision.tag == "Player" && nuDeasupra && Contor.Cont < 2)
         {
             this.GetComponent<SpriteRenderer>().sprite = inchis;
             Invoke("RestartNivel", 1f);
+            Contor.Cont++;
+        }
+        else if (Contor.Cont >= 2)
+        {
+            //Debug.Log("Patzit");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
         }
     }
 

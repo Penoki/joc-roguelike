@@ -8,10 +8,11 @@ public class MaterializareInamiciCN : MonoBehaviour
     public List<GameObject> inamic = new List<GameObject>();
     private int nrInamici;
     private GameObject materializat;
-    [Range(1, 3)] public int dificultate = 1; // la dificultate 1 intre 3 si 5 inamici per camera
+    [Range(1, 3)] public int dificultate; // la dificultate 1 intre 3 si 5 inamici per camera
     // Start is called before the first frame update
     void Start()
     {
+        dificultate = Contor.Cont + 1;
         inamic.Add(Resources.Load("Prefabs/Marioneta") as GameObject);
         inamic.Add(Resources.Load("Prefabs/SpargatorDeNuci") as GameObject);
 

@@ -25,7 +25,7 @@ public class Maimuta : MonoBehaviour
     {
         timpUrmarire = 3f;
         timpPauzaVerif = 1.4f;
-        viteza = 2.4f;
+        viteza = 2.7f;
         verifica = true;
         ranit = false;
 
@@ -195,7 +195,7 @@ public class Maimuta : MonoBehaviour
     private void dauna(double catdemult)
     {
         sanatate -= catdemult;
-        if (sanatate <= santateMax * 30 / 100 && viteza == 2.4f) { viteza = 3.4f; }
+        if (sanatate <= santateMax * 30 / 100 && viteza == 2.7f) { viteza = 3.6f; }
 
         this.GetComponent<SpriteRenderer>().color = new Color(1, 0.6f, 0.6f, 1);
 
