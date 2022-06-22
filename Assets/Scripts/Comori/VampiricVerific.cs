@@ -23,7 +23,11 @@ public class VampiricVerific : MonoBehaviour
                     System.Random reee= new System.Random();
                     //sansa 28% ca jucatorul sa fie binecuvantat cu santate
                     if (reee.Next(0, 100) < 28)
+                    {
                         this.GetComponent<Jucator>().pctSanatate++;
+                        //actualizare viata ecran
+                        this.GetComponent<Jucator>().ui.ActualizareVital();
+                    } 
                 }
             }
             nrInamiciVechi = nrInamiciCurent;

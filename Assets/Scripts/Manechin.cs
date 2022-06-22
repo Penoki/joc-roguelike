@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Manechin : MonoBehaviour
 {
+    public InterfataUtilizator ui;
     public SpriteRenderer sr;
     public double sanatate = 10;
     public double ranireRacireSec = 1.4;
@@ -13,6 +14,7 @@ public class Manechin : MonoBehaviour
 
     private void Start()
     {
+        ui = GameObject.FindGameObjectWithTag("interfata").GetComponent<InterfataUtilizator>();
         jucator = GameObject.FindWithTag("Player");
         cameraCurenta = this.transform.parent.gameObject;
         pontareaInamicului();
@@ -83,8 +85,10 @@ public class Manechin : MonoBehaviour
 
         //adaugare punctaj
         Punctaj.Punctare = Punctaj.Punctare + 100;
-        Debug.Log(Punctaj.Punctare);
-        
+        ui.ActualizarePunctaj();
+        //Debug.Log(Punctaj.Punctare);
+
+
         Destroy(this.gameObject);
     }
 

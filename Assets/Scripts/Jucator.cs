@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Jucator : MonoBehaviour
 {
+    public InterfataUtilizator ui;
     public float vitezaMiscare = 1.7f;
-    public int pctSanatate = 8, pctSanatateMax=8;
+    public int pctSanatate = 8, pctSanatateMax = 8;
     public int timpInvincibil = 1;
     public Rigidbody2D rb;
     public Animator animator;
@@ -66,20 +67,26 @@ public class Jucator : MonoBehaviour
     //este apelata 50 de ori pe secunda
     void FixedUpdate()
     {
-        if(!tpPauza)
-        rb.MovePosition(rb.position + vectorMiscare * vitezaMiscare * Time.fixedDeltaTime);
+        if (!tpPauza)
+            rb.MovePosition(rb.position + vectorMiscare * vitezaMiscare * Time.fixedDeltaTime);
     }
 
     public void primitDauna(int dauna)
     {
         if (!ranire)
         {
+
             //punctaj --
             Punctaj.Punctare -= 50;
 
             ranire = true;
-            pctSanatate-=dauna;
+            pctSanatate -= dauna;
             ranit = true;
+
+            //actualizare interfata
+            ui.ActualizareVital();
+            ui.ActualizarePunctaj();
+
             srJ.color = new Color(1, 0.6f, 0.6f, 1);
             srC.color = new Color(1, 0.6f, 0.6f, 1);
             msecundaRanit = System.DateTime.Now.Millisecond + 400;

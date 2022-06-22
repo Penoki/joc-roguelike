@@ -9,8 +9,11 @@ public class MenuPrincipal : MonoBehaviour
 {
     //transmitere samanta daca aceasta a fost introdusa
     public TMP_InputField inputCamp;
+
     public void StartJoc()
     {
+        //resetare punctaj
+        Punctaj.Punctare = 0;
         if (string.IsNullOrEmpty(inputCamp.text))
         {
             Samanta.introdusa = false;

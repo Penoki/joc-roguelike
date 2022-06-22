@@ -11,6 +11,7 @@ TagManager:
   - obstacol
   - generator
   - cameraCurenta
+  - interfata
   layers:
   - Default
   - TransparentFX

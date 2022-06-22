@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Maimuta : MonoBehaviour
 {
+    public InterfataUtilizator ui;
     public LayerMask blocadaMasca;
     private System.Random zar = new System.Random();
     public Rigidbody2D rb;
@@ -29,6 +30,7 @@ public class Maimuta : MonoBehaviour
         ranit = false;
 
         //luare referinte
+        ui = GameObject.FindGameObjectWithTag("interfata").GetComponent<InterfataUtilizator>();
         jucator = GameObject.FindGameObjectWithTag("Player");
         rb = this.GetComponent<Rigidbody2D>();
 
@@ -265,7 +267,8 @@ public class Maimuta : MonoBehaviour
 
         //adaugare punctaj
         Punctaj.Punctare = Punctaj.Punctare + 800;
-        Debug.Log(Punctaj.Punctare);
+        ui.ActualizarePunctaj();
+        //Debug.Log(Punctaj.Punctare);
 
         Destroy(this.gameObject);
     }

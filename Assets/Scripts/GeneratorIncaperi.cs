@@ -44,7 +44,12 @@ public class GeneratorIncaperi : MonoBehaviour
     void Start()
     {
         if (!Samanta.introdusa)
-        { sambure = System.DateTime.Now.Millisecond; Samanta.samanta = sambure; Samanta.introdusa = true; } //fortuita generare de samanta
+        {
+            //fortuita generare de samanta
+            sambure = Random.Range(int.MinValue, int.MaxValue-2);
+            Samanta.samanta = sambure; 
+            Samanta.introdusa = true; 
+        } 
         else
         { sambure = Samanta.samanta; }
         Random.InitState(sambure);
